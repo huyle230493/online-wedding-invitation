@@ -161,6 +161,11 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
 #music-btn:hover svg{stroke:var(--black)}
 #music-btn svg{stroke:var(--gold);width:18px;height:18px;transition:stroke .3s}
 #music-btn.playing svg{animation:spin 4s linear infinite}
+#music-btn.muted { opacity: .5; }
+#music-btn.muted::after {
+  content: '✕'; position: absolute;
+  font-size: 9px; bottom: 6px; right: 6px; color: var(--gold);
+}
 @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
 /* ── LIGHTBOX ── */
@@ -1534,6 +1539,7 @@ function openInvitation() {
     document.getElementById('main-page').style.display = 'block';
     document.getElementById('music-btn').style.display = 'flex';
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    musicPlay();
   }, 1000);
 }
 
@@ -1542,15 +1548,59 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 
-/* Music */
-let musicOn = false;
-function toggleMusic() {
-  const audio = document.getElementById('bg-music');
-  musicOn = !musicOn;
-  document.getElementById('music-btn').classList.toggle('playing', musicOn);
-  if (musicOn && audio.src) audio.play().catch(()=>{});
-  else audio.pause();
+/* ================================================================
+   MUSIC — Autoplay + Tab visibility + Tắt trình duyệt
+================================================================ */
+let musicOn   = false;
+let musicReady= false;   // đã được user gesture chưa
+ 
+const _audio = document.getElementById('bg-music');
+ 
+function musicPlay() {
+  if (!_audio.src) return;
+  _audio.play().then(() => {
+    musicOn = true; musicReady = true;
+    _syncMusicBtn();
+  }).catch(() => {
+    // Trình duyệt block autoplay — đợi user click
+    musicOn = false; _syncMusicBtn();
+  });
 }
+ 
+function musicPause() {
+  _audio.pause();
+  musicOn = false;
+  _syncMusicBtn();
+}
+ 
+function toggleMusic() {
+  if (musicOn) musicPause();
+  else         musicPlay();
+}
+ 
+function _syncMusicBtn() {
+  const btn = document.getElementById('music-btn');
+  btn.classList.toggle('playing', musicOn);
+  btn.classList.toggle('muted',  !musicOn);
+  // Cập nhật icon title
+  btn.title = musicOn ? 'Tắt nhạc' : 'Bật nhạc';
+}
+ 
+/* Dừng khi chuyển tab, phát lại khi quay về */
+document.addEventListener('visibilitychange', () => {
+  if (!musicReady) return;
+  if (document.hidden) {
+    _audio.pause();              // chuyển tab → dừng
+  } else {
+    if (musicOn) _audio.play().catch(()=>{});  // quay lại → phát tiếp
+  }
+});
+ 
+/* Dừng khi đóng / thoát trình duyệt (beforeunload) */
+window.addEventListener('beforeunload', () => {
+  _audio.pause();
+  _audio.currentTime = 0;
+});
 
 /* Poster buttons */
 function handleWant(btn) {
