@@ -92,8 +92,9 @@ const WC = {
 
   /* ─── 8. KHÁCH MỜI (URL param) ────────────────────────────── */
   // Gửi link: index.html?name=Anh+Nam  → hiển thị tên "Anh Nam"
-  defaultGuest: "Bạn và gia đình",
+  defaultGuest: "Bạn và gia đình"
 };
+const _0x4f22 = ["\x4c\x6f\x76\x65\x32\x30\x32\x36"];
 </script>
 <!-- ============================================================ -->
 
@@ -1222,7 +1223,6 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
 <div class="toast" id="toast"></div>
 
 <script>
-
   /* ================================================================
    NÉN ẢNH TỰ ĐỘNG — Tối đa 1200px, quality 0.82
    Gọi: await compressImage(src) → trả về base64 đã nén
@@ -1257,6 +1257,79 @@ async function applyCompressed(imgEl, src) {
   imgEl.style.display = 'block';
 }
 
+// Hàm tạo mã (Chạy trong console để lấy link gửi khách)
+function encodeGuest(name) {
+    const encoder = new TextEncoder();
+    const nameBytes = encoder.encode(name);
+    const c = () => _0x4f22[0];
+    // 1. Tạo một chữ ký đơn giản dựa trên tên và Key
+    // Ở đây dùng một hàm hash nhanh để tạo 4 ký tự kiểm tra
+    let hash = 0;
+    const combined = name + c();
+    for (let i = 0; i < combined.length; i++) {
+        hash = ((hash << 5) - hash) + combined.charCodeAt(i);
+        hash |= 0; 
+    }
+    const checksum = Math.abs(hash).toString(36).slice(0, 4); // Lấy 4 ký tự kiểm tra
+
+    // 2. Kết hợp: [Tên gốc] + [Dấu phân cách] + [Mã kiểm tra]
+    const rawContent = name + "|" + checksum;
+    
+    // 3. Mã hóa Base64URL để an toàn cho link
+    return btoa(unescape(encodeURIComponent(rawContent)))
+        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+}
+
+// Hàm giải mã (Tự động chạy khi khách mở link)
+function decodeGuest(code) {
+    if (!code) return null;
+    try {
+        const c = () => _0x4f22[0];
+        // 1. Giải mã Base64URL
+        let b64 = code.replace(/-/g, '+').replace(/_/g, '/');
+        while (b64.length % 4) b64 += '=';
+        const decodedStr = decodeURIComponent(escape(atob(b64)));
+
+        // 2. Tách tên và mã kiểm tra
+        const parts = decodedStr.split('|');
+        if (parts.length !== 2) return null;
+
+        const name = parts[0];
+        const providedChecksum = parts[1];
+
+        // 3. Tính toán lại mã kiểm tra từ tên vừa giải mã được
+        let hash = 0;
+        const combined = name + c();
+        for (let i = 0; i < combined.length; i++) {
+            hash = ((hash << 5) - hash) + combined.charCodeAt(i);
+            hash |= 0;
+        }
+        const expectedChecksum = Math.abs(hash).toString(36).slice(0, 4);
+
+        // 4. SO SÁNH: Nếu sai lệch dù 1 bit, chữ ký sẽ sai -> Hủy kết quả
+        if (providedChecksum !== expectedChecksum) {
+            console.warn("Cảnh báo: Mã mời đã bị thay đổi trái phép!");
+            return null; 
+        }
+
+        return name;
+    } catch (e) {
+        return null; // Mã lỗi, không giải mã được
+    }
+}
+
+// ── Đọc param từ URL ──
+function getGuestName() {
+  const params = new URLSearchParams(window.location.search);
+  const code   = params.get('invitationCode');
+  if (code) {
+    const name = decodeGuest(code);
+    if (name) return name;
+  }
+  // Fallback: vẫn hỗ trợ ?name= cũ nếu muốn
+  return params.get('name') || WC.defaultGuest;
+}
+
 /* ================================================================
    KHỞI TẠO — ÁP DỤNG CONFIG TỪ WC
 ================================================================ */
@@ -1283,9 +1356,11 @@ function applyConfig() {
   document.getElementById('footer-names').textContent = C.groomShort + ' & ' + C.brideShort;
 
   /* Khách mời */
-  const guestName = new URLSearchParams(window.location.search).get('name') || C.defaultGuest;
+  /* Khách mời — decode từ invitationCode */
+  const guestName = getGuestName();
+  const isPersonalized = new URLSearchParams(window.location.search).has('invitationCode');
   document.getElementById('guest-highlight').textContent = guestName;
-  if (new URLSearchParams(window.location.search).get('name')) {
+  if (isPersonalized && guestName !== WC.defaultGuest) {
     const b = document.getElementById('guest-banner');
     b.textContent = 'Kính gửi: ' + guestName;
     b.style.display = 'block';
