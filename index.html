@@ -134,6 +134,7 @@ img {
 ─────────────────────────────────────────────────────────────── */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
+  --album-speed: 35s; /* nhỏ = nhanh, lớn = chậm */
   --cream:#f5f0e8;--dark:#1a1410;--gold:#c9a84c;--gold-light:#e8c97a;
   --red:#8b1a1a;--muted:#6b5e4e;--white:#fdfaf5;--black:#0d0a07;
 }
@@ -465,6 +466,168 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   POLAROID ANIMATION — chọn 1 trong 3, thêm class vào .chapter-photos:
+   ch-anim-float   : lơ lửng lên xuống lệch pha (nhẹ nhàng nhất)
+   ch-anim-breathe : phồng xẹp như nhịp thở + shadow (ấm áp nhất)
+   ch-anim-sway    : lắc lư treo trên dây (lãng mạn, cinematic nhất)
+   Ví dụ: <div class="chapter-photos ch-layout-c ch-anim-float">
+═══════════════════════════════════════════════════════════════ */
+ 
+/* — Float — */
+.ch-anim-float .ch-photo:first-child{
+  transform:rotate(-2deg);
+  animation:chFloat1 4s ease-in-out infinite;
+}
+.ch-anim-float .ch-photo:last-child{
+  transform:rotate(2deg);
+  animation:chFloat2 4s ease-in-out infinite;
+}
+@keyframes chFloat1{
+  0%,100%{transform:rotate(-2deg) translateY(0px)}
+  50%    {transform:rotate(-1.3deg) translateY(-10px)}
+}
+@keyframes chFloat2{
+  0%,100%{transform:rotate(2deg) translateY(-5px)}
+  50%    {transform:rotate(1.3deg) translateY(6px)}
+}
+ 
+/* — Breathe — */
+.ch-anim-breathe .ch-photo:first-child{
+  transform:rotate(-2deg);
+  transform-origin:center bottom;
+  animation:chBreathe1 5s ease-in-out infinite;
+}
+.ch-anim-breathe .ch-photo:last-child{
+  transform:rotate(2deg);
+  transform-origin:center bottom;
+  animation:chBreathe2 5s ease-in-out infinite;
+}
+@keyframes chBreathe1{
+  0%,100%{transform:rotate(-2deg) scale(1);   box-shadow:0 6px 24px rgba(0,0,0,.22)}
+  50%    {transform:rotate(-2deg) scale(1.04); box-shadow:0 14px 40px rgba(0,0,0,.40)}
+}
+@keyframes chBreathe2{
+  0%,100%{transform:rotate(2deg) scale(1.04); box-shadow:0 14px 40px rgba(0,0,0,.40)}
+  50%    {transform:rotate(2deg) scale(1);    box-shadow:0 6px 24px rgba(0,0,0,.22)}
+}
+ 
+/* — Sway — */
+.ch-anim-sway .ch-photo:first-child{
+  transform:rotate(-2deg);
+  transform-origin:center top;
+  animation:chSway1 6s ease-in-out infinite;
+}
+.ch-anim-sway .ch-photo:last-child{
+  transform:rotate(2deg);
+  transform-origin:center top;
+  animation:chSway2 6s ease-in-out infinite;
+}
+@keyframes chSway1{
+  0%,100%{transform:rotate(-2deg)}
+  25%    {transform:rotate(-4.5deg)}
+  75%    {transform:rotate(-0.5deg)}
+}
+@keyframes chSway2{
+  0%,100%{transform:rotate(2deg)}
+  25%    {transform:rotate(4.5deg)}
+  75%    {transform:rotate(0.5deg)}
+}
+ 
+/* Tắt animation khi hover để user xem ảnh rõ hơn */
+.ch-anim-float .ch-photo:hover,
+.ch-anim-breathe .ch-photo:hover,
+.ch-anim-sway .ch-photo:hover{
+  animation-play-state:paused;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PORTRAIT ANIMATION — thêm class vào <div class="portrait-section ...">:
+   portrait-anim-float   : 2 ảnh nổi lên xuống lệch pha
+   portrait-anim-breathe : phồng xẹp như nhịp thở + shadow
+   portrait-anim-sway    : lắc lư treo trên dây (lãng mạn nhất)
+   Kết hợp với layout: "portrait-section portrait-layout-1 portrait-anim-sway"
+═══════════════════════════════════════════════════════════════ */
+ 
+/* — Portrait Float — */
+.portrait-anim-float .portrait-item:first-child{
+  animation:pFloat1 4s ease-in-out infinite;
+}
+.portrait-anim-float .portrait-item:last-child{
+  animation:pFloat2 4s ease-in-out infinite;
+}
+@keyframes pFloat1{
+  0%,100%{transform:translateY(0px)}
+  50%    {transform:translateY(-10px)}
+}
+@keyframes pFloat2{
+  0%,100%{transform:translateY(-6px)}
+  50%    {transform:translateY(6px)}
+}
+ 
+/* — Portrait Breathe — */
+.portrait-anim-breathe .portrait-item:first-child{
+  transform-origin:center bottom;
+  animation:pBreathe1 5s ease-in-out infinite;
+}
+.portrait-anim-breathe .portrait-item:last-child{
+  transform-origin:center bottom;
+  animation:pBreathe2 5s ease-in-out infinite;
+}
+@keyframes pBreathe1{
+  0%,100%{transform:scale(1);   filter:brightness(1)}
+  50%    {transform:scale(1.03); filter:brightness(1.06)}
+}
+@keyframes pBreathe2{
+  0%,100%{transform:scale(1.03); filter:brightness(1.06)}
+  50%    {transform:scale(1);    filter:brightness(1)}
+}
+ 
+/* — Portrait Sway — */
+.portrait-anim-sway .portrait-item:first-child{
+  transform-origin:center top;
+  animation:pSway1 6s ease-in-out infinite;
+}
+.portrait-anim-sway .portrait-item:last-child{
+  transform-origin:center top;
+  animation:pSway2 6s ease-in-out infinite;
+}
+@keyframes pSway1{
+  0%,100%{transform:rotate(0deg)}
+  25%    {transform:rotate(-1.2deg)}
+  75%    {transform:rotate(0.6deg)}
+}
+@keyframes pSway2{
+  0%,100%{transform:rotate(0deg)}
+  25%    {transform:rotate(1.2deg)}
+  75%    {transform:rotate(-0.6deg)}
+}
+ 
+/* Layout-3 (film reel đã có rotate sẵn) — override để anim rotate từ góc đó */
+.portrait-layout-3.portrait-anim-sway .portrait-item:first-child{
+  animation:pSway3L 6s ease-in-out infinite;
+}
+.portrait-layout-3.portrait-anim-sway .portrait-item:last-child{
+  animation:pSway3R 6s ease-in-out infinite;
+}
+@keyframes pSway3L{
+  0%,100%{transform:rotate(-3.5deg)}
+  25%    {transform:rotate(-5.5deg)}
+  75%    {transform:rotate(-2deg)}
+}
+@keyframes pSway3R{
+  0%,100%{transform:rotate(3deg)}
+  25%    {transform:rotate(5deg)}
+  75%    {transform:rotate(1.5deg)}
+}
+ 
+/* Tắt animation khi hover */
+.portrait-anim-float .portrait-item:hover,
+.portrait-anim-breathe .portrait-item:hover,
+.portrait-anim-sway .portrait-item:hover{
+  animation-play-state:paused;
+}
+
+/* ═══════════════════════════════════════════════════════════════
    POSTER SECTION — 3 LAYOUTS PHIM
    Chọn layout bằng cách thêm class vào <div class="poster-section ...">:
    poster-layout-1  : Text trái + ảnh đứng phải (default hiện tại)
@@ -619,11 +782,152 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
 .map-section{background:var(--white);padding:40px 32px;text-align:center}
 .map-iframe{width:100%;height:250px;border:1px solid rgba(201,168,76,.3);border-radius:8px;margin-bottom:16px}
 
-/* ── ALBUM ── */
-.album-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:32px}
-.album-item{position:relative;padding-bottom:130%;overflow:hidden;border-radius:4px;border:1px solid rgba(201,168,76,.3)}
-.album-item img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease;cursor:pointer}
-.album-item:hover img{transform:scale(1.05)}
+/* ── ALBUM MARQUEE (infinite smooth scroll) ── */
+ 
+/* Tuỳ chỉnh tốc độ: giá trị nhỏ = nhanh hơn */
+:root{ --album-speed: 35s; }
+ 
+.album-slider-wrap{
+  position:relative;
+  margin-top:28px;
+  overflow:hidden;                /* cắt bỏ phần ngoài viewport */
+  /* fade mờ 2 cạnh */
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 10%,#000 90%,transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0%,#000 10%,#000 90%,transparent 100%);
+}
+ 
+/* track = flex container chạy animation liên tục */
+.album-track{
+  display:flex;
+  gap:14px;
+  width:max-content;              /* rộng bằng tổng nội dung */
+  padding:8px 0 16px;
+  animation:albumMarquee var(--album-speed) linear infinite;
+  cursor:grab;
+  will-change:transform;
+}
+.album-track:active{ cursor:grabbing; }
+ 
+/* Dừng animation khi hover hoặc bị pause bởi JS */
+.album-track.paused,
+.album-track:hover{
+  animation-play-state:paused;
+}
+ 
+@keyframes albumMarquee{
+  0%   { transform:translateX(0); }
+  100% { transform:translateX(-50%); } /* -50% vì track chứa 2 bản copy */
+}
+
+.album-card{
+  flex:0 0 auto;
+  width:220px;height:300px;
+  scroll-snap-align:center;
+  position:relative;overflow:hidden;
+  border-radius:10px;
+  border:1px solid rgba(201,168,76,.25);
+  background:#1a1410;
+  cursor:pointer;
+  transition:transform .3s ease,box-shadow .3s ease;
+  box-shadow:0 4px 20px rgba(0,0,0,.3);
+}
+.album-card:hover{
+  transform:translateY(-6px) scale(1.03);
+  box-shadow:0 14px 36px rgba(0,0,0,.45);
+}
+.album-card img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center top;
+  transition:transform .5s ease;
+  image-rendering:auto;-ms-interpolation-mode:bicubic;
+  display:block;
+}
+.album-card:hover img{transform:scale(1.07)}
+/* gradient caption dưới */
+.album-card-cap{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:28px 12px 12px;
+  background:linear-gradient(transparent,rgba(13,10,7,.8));
+  font-size:11px;color:rgba(245,240,232,.7);
+  text-align:center;letter-spacing:1px;
+}
+/* placeholder khi chưa có ảnh */
+.album-card-ph{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;
+  color:rgba(201,168,76,.2);border:1px dashed rgba(201,168,76,.12);
+  border-radius:10px;cursor:pointer;text-align:center;padding:16px;
+}
+.album-card-ph svg{width:32px;height:32px;stroke:currentColor}
+.album-card-ph span{font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  line-height:1.5;color:rgba(201,168,76,.3)}
+/* nút scroll trái/phải */
+.album-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(13,10,7,.75);border:1px solid rgba(201,168,76,.4);
+  color:var(--gold);font-size:18px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:5;transition:background .2s;
+  backdrop-filter:blur(6px);
+  -webkit-mask-image:none;mask-image:none;
+}
+.album-nav:hover{background:rgba(201,168,76,.25)}
+.album-nav.prev{left:4px}
+.album-nav.next{right:4px}
+/* dots indicator */
+.album-dots{
+  display:flex;justify-content:center;gap:6px;margin-top:12px;
+}
+.album-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:rgba(201,168,76,.25);transition:all .3s;cursor:pointer;
+}
+.album-dot.active{background:var(--gold);width:16px;border-radius:3px}
+ 
+/* ── LIGHTBOX (nâng cấp) ── */
+.lb{
+  position:fixed;inset:0;background:rgba(13,10,7,.97);
+  z-index:9000;display:none;flex-direction:column;
+  align-items:center;justify-content:center;padding:20px;
+  animation:lbFadeIn .25s ease;
+}
+.lb.open{display:flex}
+@keyframes lbFadeIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+.lb-inner{position:relative;max-width:92vw;max-height:80vh}
+.lb-inner img{
+  max-width:100%;max-height:80vh;object-fit:contain;
+  border-radius:6px;display:block;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+.lb-close{
+  position:fixed;top:18px;right:22px;
+  font-size:28px;color:var(--gold);cursor:pointer;
+  width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;background:rgba(201,168,76,.1);
+  transition:background .2s;z-index:9010;
+}
+.lb-close:hover{background:rgba(201,168,76,.25)}
+.lb-cap{
+  margin-top:14px;font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:15px;color:rgba(245,240,232,.5);letter-spacing:1px;
+}
+/* prev/next trong lightbox */
+.lb-prev,.lb-next{
+  position:fixed;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);
+  color:var(--gold);font-size:22px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:9010;transition:background .2s;
+  backdrop-filter:blur(8px);
+}
+.lb-prev:hover,.lb-next:hover{background:rgba(201,168,76,.28)}
+.lb-prev{left:12px}.lb-next{right:12px}
+.lb-counter{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  font-size:11px;letter-spacing:3px;color:rgba(201,168,76,.4);
+}
 
 /* ── VIDEO ── */
 .video-wrapper{position:relative;padding-bottom:56.25%;height:0;margin-top:32px;border:2px solid var(--gold);border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.5)}
@@ -694,10 +998,15 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
 <div class="grain"></div>
 
 <!-- LIGHTBOX -->
-<div class="lb" id="lb" onclick="closeLB()">
-  <div class="lb-close">✕</div>
-  <img id="lb-img" src="" alt="">
+<div class="lb" id="lb">
+  <div class="lb-close" onclick="closeLB()">✕</div>
+  <div class="lb-prev" onclick="lbNav(-1)">&#8249;</div>
+  <div class="lb-inner">
+    <img id="lb-img" src="" alt="" onclick="closeLB()">
+  </div>
+  <div class="lb-next" onclick="lbNav(1)">&#8250;</div>
   <p class="lb-cap" id="lb-cap"></p>
+  <div class="lb-counter" id="lb-counter"></div>
 </div>
 
 <!-- OPENING -->
@@ -748,7 +1057,7 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
        CHÂN DUNG CÔ DÂU & CHÚ RỂ
        📸 Đặt đường dẫn ảnh vào WC.groomPhoto / WC.bridePhoto / WC.coupleHero
   ══════════════════════════════════════════════════ -->
-  <div class="portrait-section portrait-layout-3 reveal">
+  <div class="portrait-section portrait-layout-3 portrait-anim-breathe reveal">
     <!-- Hai chân dung cạnh nhau -->
     <div class="portrait-grid">
       <!-- Chú rể -->
@@ -900,7 +1209,7 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
         Em là người tôi yêu không chút do dự, không chút giả dối – bằng tất cả chân thành.
       </p>
       <!-- 2 ảnh chapter 1 -->
-      <div class="chapter-photos ch-layout-c">
+      <div class="chapter-photos ch-layout-c ch-anim-sway">
         <div class="ch-photo" id="ch1p1-wrap" onclick="chPhotoClick('ch1p1-img','ch1p1-ph','ch1Photo1','Lần đầu gặp nhau')">
           <div class="ch-photo-ph" id="ch1p1-ph" onclick="hint('WC.ch1Photo1')">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -934,7 +1243,7 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
         Điều quan trọng là những ký ức vui vẻ còn đọng lại,<br>
         Và khi ngoảnh lại… em vẫn luôn ở đó bên tôi.
       </p>
-      <div class="chapter-photos ch-layout-c">
+      <div class="chapter-photos ch-layout-c ch-anim-breathe">
         <div class="ch-photo" id="ch2p1-wrap" onclick="chPhotoClick('ch2p1-img','ch2p1-ph','ch2Photo1','Khoảnh khắc yêu')">
           <div class="ch-photo-ph" id="ch2p1-ph" onclick="hint('WC.ch2Photo1')">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -965,7 +1274,7 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
         Chúng mình đã có câu trả lời cho tương lai.<br>
         Bên nhau – qua hoàng hôn và bốn mùa.
       </p>
-      <div class="chapter-photos ch-layout-c">
+      <div class="chapter-photos ch-layout-c ch-anim-float">
         <div class="ch-photo" id="ch3p1-wrap" onclick="chPhotoClick('ch3p1-img','ch3p1-ph','ch3Photo1','Ngày đặc biệt')">
           <div class="ch-photo-ph" id="ch3p1-ph" onclick="hint('WC.ch3Photo1')">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -1010,7 +1319,7 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
       <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
       <div class="timeline-content">
         <p class="timeline-label">Khi cưới nhau</p>
-        <p class="timeline-text">Ba kiếp mới được may mắn này,<br>cả quãng đời còn lại – chỉ dành cho em.</p>
+        <p class="timeline-text">Ba kiếp mới được may mắn này,<br>cả quãng đời còn lại – chỉ dành cho chúng ta.</p>
       </div>
     </div>
   </div>
@@ -1045,6 +1354,28 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
       <p class="from-names" id="from-names"></p>
       <p style="font-size:12px;letter-spacing:2px;color:rgba(201,168,76,.4);margin-top:6px;">T&amp;H｜SAVE THE DATE</p>
     </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       RSVP
+  ══════════════════════════════════════════════════ -->
+  <div class="rsvp-section reveal">
+    <p class="section-eyebrow" style="text-align:center;margin-bottom:8px;">RSVP</p>
+    <h2 class="section-heading">Xác nhận tham dự</h2>
+    <div class="gold-divider" style="margin-bottom:28px;"><div class="gold-diamond"></div></div>
+    <div class="form-group">
+      <label class="form-label">Họ và tên</label>
+      <input class="form-input" type="text" placeholder="Nhập họ và tên của bạn..." id="rsvp-name">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Bạn sẽ tham dự chứ?</label>
+      <select class="form-select" id="rsvp-attend">
+        <option value="">— Chọn câu trả lời —</option>
+        <option value="yes">Có, tôi sẽ tham dự</option>
+        <option value="no">Tôi bận, rất tiếc không thể tham dự</option>
+      </select>
+    </div>
+    <button class="submit-btn" onclick="submitRsvp()">Gửi xác nhận</button>
   </div>
 
   <!-- ═══════════════════════════════════════════════
@@ -1101,28 +1432,6 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
   </div>
 
   <!-- ═══════════════════════════════════════════════
-       RSVP
-  ══════════════════════════════════════════════════ -->
-  <div class="rsvp-section reveal">
-    <p class="section-eyebrow" style="text-align:center;margin-bottom:8px;">RSVP</p>
-    <h2 class="section-heading">Xác nhận tham dự</h2>
-    <div class="gold-divider" style="margin-bottom:28px;"><div class="gold-diamond"></div></div>
-    <div class="form-group">
-      <label class="form-label">Họ và tên</label>
-      <input class="form-input" type="text" placeholder="Nhập họ và tên của bạn..." id="rsvp-name">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Bạn sẽ tham dự chứ?</label>
-      <select class="form-select" id="rsvp-attend">
-        <option value="">— Chọn câu trả lời —</option>
-        <option value="yes">Có, tôi sẽ tham dự</option>
-        <option value="no">Tôi bận, rất tiếc không thể tham dự</option>
-      </select>
-    </div>
-    <button class="submit-btn" onclick="submitRsvp()">Gửi xác nhận</button>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════
        ALBUM
        📸 Đặt ảnh vào WC.album[]
   ══════════════════════════════════════════════════ -->
@@ -1130,7 +1439,12 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
     <p class="section-eyebrow">Khoảnh khắc</p>
     <h2 class="section-heading">Album Hình Ảnh</h2>
     <div class="gold-divider"><div class="gold-diamond"></div></div>
-    <div class="album-grid" id="album-grid"></div>
+    <div class="album-slider-wrap">
+      <button class="album-nav prev" onclick="albumScroll(-1)">‹</button>
+    <div class="album-track" id="album-track"></div>
+      <button class="album-nav next" onclick="albumScroll(1)">›</button>
+    </div>
+    <div class="album-dots" id="album-dots"></div>
   </div>
 
   <!-- ═══════════════════════════════════════════════
@@ -1382,7 +1696,7 @@ function applyConfig() {
   document.getElementById('guest-highlight').textContent = guestName;
   if (isPersonalized && guestName !== WC.defaultGuest) {
     const b = document.getElementById('guest-banner');
-    b.textContent = 'Kính gửi: ' + guestName;
+    b.textContent = 'Thân gửi: ' + guestName;
     b.style.display = 'block';
   }
 
@@ -1392,8 +1706,8 @@ function applyConfig() {
   document.getElementById('maps-open-btn').href = C.mapsUrl;
 
   /* Điện thoại */
-  document.getElementById('call-groom-name').textContent = 'Gọi ' + C.groomShort;
-  document.getElementById('call-bride-name').textContent  = 'Gọi ' + C.brideShort;
+  document.getElementById('call-groom-name').textContent = 'Gọi Chú Rể';
+  document.getElementById('call-bride-name').textContent  = 'Gọi Cô Dâu';
   document.getElementById('call-groom-num').textContent   = C.phoneGroom;
   document.getElementById('call-bride-num').textContent   = C.phoneBride;
   document.getElementById('call-groom-btn').href = 'tel:' + C.phoneGroom;
@@ -1469,19 +1783,120 @@ function setChImg(imgId, phId, lblId, src, caption) {
   applyCompressed(img, src);
 }
 
-/* Album */
+/* ================================================================
+   ALBUM SLIDER — Drag to scroll + dots + keyboard nav
+================================================================ */
+let albumImages = [];   // [{src, cap}] — sync với WC.album
+ 
 function buildAlbum() {
-  const grid = document.getElementById('album-grid');
-  grid.innerHTML = '';
-  WC.album.forEach((a, i) => {
-    const div = document.createElement('div');
-    div.className = 'album-item';
-    const img = document.createElement('img');
-    img.src = a.src; img.alt = a.cap;
-    img.onclick = () => openLB(a.src, a.cap);
-    div.appendChild(img);
-    grid.appendChild(div);
+  albumImages = WC.album.filter(a => a);
+  const track = document.getElementById('album-track');
+  const dots  = document.getElementById('album-dots');
+  track.innerHTML = '';
+  dots.innerHTML  = '';
+ 
+  // ── Bước 1: Build tất cả card, dùng src gốc trước (không lazy, không async)
+  //   Sau khi clone xong mới nén async để tránh clone bị rỗng
+  const builtCards = [];
+ 
+  albumImages.forEach((a, i) => {
+    const card = document.createElement('div');
+    card.className = 'album-card';
+    card.dataset.index = i;
+ 
+    if (a.src) {
+      const img = document.createElement('img');
+      img.alt        = a.cap || '';
+      img.draggable  = false;
+      img.src        = a.src;   // ← set src gốc NGAY, không async, không lazy
+      card.appendChild(img);
+ 
+      const cap = document.createElement('div');
+      cap.className   = 'album-card-cap';
+      cap.textContent = a.cap || '';
+      card.appendChild(cap);
+ 
+      card.onclick = () => openLB(i);
+      builtCards.push({ img, src: a.src });  // lưu lại để nén sau
+    } else {
+      const ph = document.createElement('div');
+      ph.className = 'album-card-ph';
+      ph.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Ảnh ${i+1}</span>`;
+      ph.onclick = () => hint('album[' + i + '].src');
+      card.appendChild(ph);
+    }
+    track.appendChild(card);
+ 
+    // Dots
+    const dot = document.createElement('div');
+    dot.className = 'album-dot' + (i === 0 ? ' active' : '');
+    dots.appendChild(dot);
   });
+ 
+  // ── Bước 2: Clone node (KHÔNG dùng innerHTML để tránh mất src đang load)
+  //   cloneNode(true) sao chép đúng DOM node kể cả src đã được set
+  const originalCards = Array.from(track.children);
+  originalCards.forEach(card => {
+    const cloned = card.cloneNode(true);
+    // Gán lại onclick cho clone (cloneNode không clone event listeners)
+    const idx = parseInt(cloned.dataset.index);
+    if (!isNaN(idx) && albumImages[idx]?.src) {
+      cloned.onclick = () => openLB(idx);
+    }
+    track.appendChild(cloned);
+  });
+ 
+  // ── Bước 3: Nén ảnh async SAU KHI đã clone — chỉ nén bản gốc
+  //   Clone tự cập nhật vì đã share cùng src (trình duyệt cache lại)
+  builtCards.forEach(({ img, src }) => {
+    compressImage(src).then(out => {
+      if (out !== src) img.src = out;
+      // Cập nhật luôn img trong các clone có cùng index
+      const idx = img.closest('.album-card')?.dataset.index;
+      if (idx !== undefined) {
+        track.querySelectorAll(`.album-card[data-index="${idx}"] img`).forEach(el => {
+          el.src = out;
+        });
+      }
+    });
+  });
+ 
+  // ── Bước 4: Pause khi hover / touch / tab ẩn
+  _albumBindPause(track);
+}
+ 
+/* ── PAUSE / RESUME helpers ── */
+function _albumBindPause(track) {
+  const pause  = () => track.classList.add('paused');
+  const resume = () => track.classList.remove('paused');
+ 
+  track.addEventListener('mouseenter',  pause,  { passive:true });
+  track.addEventListener('mouseleave',  resume, { passive:true });
+  track.addEventListener('touchstart',  pause,  { passive:true });
+  track.addEventListener('touchend',    () => setTimeout(resume, 800), { passive:true });
+ 
+  // Tab ẩn → pause; tab active → resume
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? pause() : resume();
+  });
+}
+ 
+/* Nút ‹ › : chỉ tua tốc độ animation tạm thời */
+function albumScroll(dir) {
+  const track = document.getElementById('album-track');
+  // Tăng tốc 4x trong 600ms rồi trả về bình thường
+  track.style.animationDuration = (dir > 0 ? '8s' : '8s');
+  track.style.animationDirection = dir > 0 ? 'normal' : 'reverse';
+  setTimeout(() => {
+    track.style.animationDuration = '';
+    track.style.animationDirection = 'normal';
+  }, 600);
+}
+ 
+/* albumScrollTo giữ lại cho dots click — không dùng scroll nữa, chỉ flash dot */
+function albumScrollTo(idx) {
+  document.querySelectorAll('.album-dot').forEach((d,i) =>
+    d.classList.toggle('active', i === idx));
 }
 
 /* Video */
@@ -1512,18 +1927,76 @@ function buildCalendar() {
   }
 }
 
-/* Lightbox */
-function openLB(src, cap) {
-  document.getElementById('lb-img').src = src;
-  document.getElementById('lb-cap').textContent = cap||'';
-  document.getElementById('lb').classList.add('open');
+/* ================================================================
+   LIGHTBOX — prev/next + keyboard + index-based cho album
+================================================================ */
+let _lbIndex   = -1;    // index trong albumImages, -1 = từ chapter/portrait
+let _lbSrcList = [];    // list src khi dùng từ bên ngoài album
+ 
+function openLB(indexOrSrc, cap) {
+  const el = document.getElementById('lb');
+  const img= document.getElementById('lb-img');
+  const capEl = document.getElementById('lb-cap');
+  const ctrEl = document.getElementById('lb-counter');
+ 
+  if (typeof indexOrSrc === 'number') {
+    // Mở từ album slider theo index
+    _lbIndex = indexOrSrc;
+    _lbSrcList = [];
+    const a = albumImages[_lbIndex];
+    img.src = a.src || '';
+    capEl.textContent = a.cap || '';
+    ctrEl.textContent = (_lbIndex+1) + ' / ' + albumImages.filter(a=>a.src).length;
+  } else {
+    // Mở từ chapter photo, portrait (src trực tiếp)
+    _lbIndex = -1;
+    _lbSrcList = [];
+    img.src = indexOrSrc;
+    capEl.textContent = cap || '';
+    ctrEl.textContent = '';
+  }
+  el.classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
-function closeLB() { document.getElementById('lb').classList.remove('open'); }
-
-/* Chapter photo click (lightbox if has image) */
+ 
+function closeLB() {
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow = '';
+}
+ 
+function lbNav(dir) {
+  if (_lbIndex < 0) return;
+  // Tìm index tiếp theo có ảnh
+  const validIdx = albumImages
+    .map((a,i)=>({a,i}))
+    .filter(({a})=>a.src);
+  const pos = validIdx.findIndex(({i})=>i===_lbIndex);
+  const next = validIdx[(pos + dir + validIdx.length) % validIdx.length];
+  if (next) openLB(next.i);
+}
+ 
+// Keyboard nav
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lb').classList.contains('open')) return;
+  if (e.key === 'Escape')     closeLB();
+  if (e.key === 'ArrowRight') lbNav(1);
+  if (e.key === 'ArrowLeft')  lbNav(-1);
+});
+ 
+// Swipe touch trên lightbox
+(function(){
+  let tx=0;
+  document.getElementById('lb').addEventListener('touchstart', e=>{ tx=e.changedTouches[0].clientX; },{passive:true});
+  document.getElementById('lb').addEventListener('touchend',   e=>{
+    const dx=e.changedTouches[0].clientX-tx;
+    if (Math.abs(dx)>50) lbNav(dx<0?1:-1);
+  },{passive:true});
+})();
+ 
+/* Chapter photo click → lightbox */
 function chPhotoClick(imgId, phId, cfgKey, cap) {
   const img = document.getElementById(imgId);
-  if (img && img.src && !img.src.endsWith('/')) openLB(img.src, cap);
+  if (img && img.src && !img.src.endsWith('/') && !img.src.endsWith('#')) openLB(img.src, cap);
 }
 
 /* Hint */
