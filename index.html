@@ -759,7 +759,7 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
 .from-names{font-family:'Dancing Script',cursive;font-size:28px;color:var(--gold)}
 
 /* ── SAVE THE DATE ── */
-.save-section{background:var(--cream);padding:56px 32px;text-align:center}
+.save-section{background:var(--white);padding:56px 32px;text-align:center}
 .save-badge{display:inline-block;border:1px solid var(--gold);padding:6px 20px;border-radius:20px;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
 .save-date-big{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:var(--dark);line-height:1;margin:12px 0}
 .save-weekday{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
@@ -779,7 +779,7 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
 .click-hint{font-size:11px;color:rgba(201,168,76,.6);margin-top:10px;animation:blink 1.5s infinite}
 
 /* ── MAP ── */
-.map-section{background:var(--white);padding:40px 32px;text-align:center}
+.map-section{background:var(--cream);padding:40px 32px;text-align:center}
 .map-iframe{width:100%;height:250px;border:1px solid rgba(201,168,76,.3);border-radius:8px;margin-bottom:16px}
 
 /* ── ALBUM MARQUEE (infinite smooth scroll) ── */
@@ -962,7 +962,7 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
 .note-card{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.1);border-radius:8px;padding:20px;margin-bottom:12px;font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(245,240,232,.7);line-height:1.8}
 
 /* ── RSVP ── */
-.rsvp-section{background:var(--white);padding:48px 32px}
+.rsvp-section{background:var(--cream);padding:48px 32px}
 .rsvp-section .section-heading{text-align:center;margin-bottom:28px}
 .form-group{margin-bottom:16px}
 .form-label{display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
@@ -1357,6 +1357,23 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
   </div>
 
   <!-- ═══════════════════════════════════════════════
+       SAVE THE DATE
+  ══════════════════════════════════════════════════ -->
+  <div class="save-section reveal">
+    <span class="save-badge">Save the Date</span>
+    <p class="section-eyebrow">Thời gian</p>
+    <p class="save-weekday" id="save-weekday"></p>
+    <p class="save-date-big" id="save-date-big"></p>
+    <p class="save-lunar" id="save-lunar"></p>
+    <div class="gold-divider"><div class="gold-diamond"></div></div>
+    <p class="section-eyebrow" style="margin-top:24px;">Địa điểm</p>
+    <div class="address-block">
+      <p class="address-label" id="venue-name"></p>
+      <p class="address-text" id="venue-addr"></p>
+    </div>
+  </div>
+  
+  <!-- ═══════════════════════════════════════════════
        RSVP
   ══════════════════════════════════════════════════ -->
   <div class="rsvp-section reveal">
@@ -1376,23 +1393,6 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
       </select>
     </div>
     <button class="submit-btn" onclick="submitRsvp()">Gửi xác nhận</button>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════
-       SAVE THE DATE
-  ══════════════════════════════════════════════════ -->
-  <div class="save-section reveal">
-    <span class="save-badge">Save the Date</span>
-    <p class="section-eyebrow">Thời gian</p>
-    <p class="save-weekday" id="save-weekday"></p>
-    <p class="save-date-big" id="save-date-big"></p>
-    <p class="save-lunar" id="save-lunar"></p>
-    <div class="gold-divider"><div class="gold-diamond"></div></div>
-    <p class="section-eyebrow" style="margin-top:24px;">Địa điểm</p>
-    <div class="address-block">
-      <p class="address-label" id="venue-name"></p>
-      <p class="address-text" id="venue-addr"></p>
-    </div>
   </div>
 
   <!-- ═══════════════════════════════════════════════
@@ -1435,7 +1435,7 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
        ALBUM
        📸 Đặt ảnh vào WC.album[]
   ══════════════════════════════════════════════════ -->
-  <div class="section section-cream reveal">
+  <div class="section section-white reveal">
     <p class="section-eyebrow">Khoảnh khắc</p>
     <h2 class="section-heading">Album Hình Ảnh</h2>
     <div class="gold-divider"><div class="gold-diamond"></div></div>
