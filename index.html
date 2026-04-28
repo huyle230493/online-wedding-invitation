@@ -202,7 +202,32 @@ body{background:var(--black);color:var(--dark);font-family:'Be Vietnam Pro',sans
 .film-title-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:20px;position:relative;z-index:2;opacity:0;animation:fadeUp 1s ease .5s forwards}
 .hero-title{font-family:'Lavishly Yours';font-size:102px;font-weight:400;font-style:italic;color:#fff;line-height:1.1;position:relative;z-index:2;opacity:0;animation:fadeUp 1s ease .8s forwards;text-shadow:0 4px 40px rgba(201,168,76,.2)}
 .hero-ampersand{display:block;font-family:'Lavishly Yours';font-size:72px;color:var(--gold);line-height:.99;margin-bottom:10px}
-.hero-names{font-family:'Cormorant Garamond',serif;font-size:28px;font-style:italic;color:rgba(245,240,232,.8);margin-top:16px;letter-spacing:2px;position:relative;z-index:2;opacity:0;animation:fadeUp 1s ease 1.1s forwards}
+/* Tên trên Hero - Tự nhỏ lại và ép xuống dòng ở ký tự & khi cần */
+.hero-names {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5.8vw; /* Chữ tự nhỏ lại theo màn hình */
+  font-style: italic;
+  color: rgba(245,240,232,0.8);
+  margin-top: 16px;
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeUp 1s ease 1.1s forwards;
+  
+  /* Xử lý xuống dòng tại dấu & */
+  display: block;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Giới hạn kích thước tối đa cho màn hình lớn */
+@media (min-width: 480px) {
+  .hero-names {
+    font-size: 28px;
+  }
+}
 .hero-date-line{display:flex;align-items:center;gap:12px;margin-top:28px;position:relative;z-index:2;opacity:0;animation:fadeUp 1s ease 1.4s forwards}
 .hero-date-line::before,.hero-date-line::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.5))}
 .hero-date-line::after{background:linear-gradient(to left,transparent,rgba(201,168,76,.5))}
