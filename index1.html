@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiệp Cưới | Minh Huy & Thế Thương</title>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<!-- ⚙️ CONFIG -->
+<script>
+const WC = {
+  groomShort:  "Minh Huy",
+  brideShort:  "Thế Thương",
+  groomFull:   "Minh Huy",
+  brideFull:   "Thế Thương",
+  weddingDate: "2026-06-20T10:00:00",
+  dateDisplay: "20 · 06 · 2026",
+  weekday:     "Thứ Bảy",
+  lunar:       "Ngày 06 tháng 05 năm Bính Ngọ",
+  weddingTime: "10:00 SA",
+  venueName:   "Asiana Plaza (Tân Phú)",
+  venueAddress:"284 - 286 Vườn Lài, Phú Thọ Hòa, Tân Phú, TP.HCM",
+  mapsEmbed:   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.303215113691!2d106.62298207586872!3d10.788072758977114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752d9d5888fc19%3A0x172d76a84a0ca188!2sAsiana%20Plaza%20(T%C3%A2n%20Ph%C3%BA)!5e0!3m2!1svi!2s!4v1777088522651!5m2!1svi!2s",
+  mapsUrl:     "https://maps.app.goo.gl/xxx",
+  phoneGroom:  "0901234567",
+  phoneBride:  "0907654321",
+  heroPhoto:   "",
+  groomPhoto:  "",
+  bridePhoto:  "",
+  couplePhoto: "",
+  ch1Photo1:"", ch1Photo2:"",
+  ch2Photo1:"", ch2Photo2:"",
+  ch3Photo1:"", ch3Photo2:"",
+  album:[
+    {src:"https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=900&q=85",cap:"Chúng mình"},
+    {src:"https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=900&q=85",cap:"Kỷ niệm"},
+    {src:"https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=900&q=85",cap:"Yêu thương"},
+    {src:"https://images.unsplash.com/photo-1606800052052-a08af7148866?w=900&q=85",cap:"Hạnh phúc"},
+    {src:"https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=900&q=85",cap:"Bên nhau"},
+    {src:"https://images.unsplash.com/photo-1621508688461-827c8a41dcd7?w=900&q=85",cap:"Mãi mãi"},
+  ],
+  videoEmbed:  "https://www.youtube.com/embed/S07rXuslOsg?si=oV_XsqDWUeVUUPqm",
+  videoType:   "youtube",
+  qrUrl:       "https://cinelove.me/s/b13394d7-f2d6-4aa1-b9bd-a4c66bc8a4b7",
+  musicUrl:    "",
+  defaultGuest:"Bạn và gia đình",
+  albumSpeed:  "38s",
+};
+</script>
+
+<style>
+/* ═══════════════════════════════════════════════════
+   RESET & TOKENS
+═══════════════════════════════════════════════════ */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:    #1c1a16;
+  --ink2:   #3d3830;
+  --muted:  #6b6358;
+  --pale:   #f7f3ec;
+  --cream:  #ede8de;
+  --white:  #fdfaf5;
+  --sage:   #4a5c44;
+  --sage2:  #6b8063;
+  --blush:  #c4857a;
+  --blush2: #d9a89f;
+  --gold:   #9a7c3f;
+  --gold2:  #c4a35a;
+  --border: rgba(60,50,35,.12);
+}
+html{scroll-behavior:smooth}
+body{background:#ede8de;color:var(--ink);font-family:'Jost',sans-serif;overflow-x:hidden}
+.page{max-width:480px;margin:0 auto;background:var(--white);position:relative;overflow:hidden}
+
+/* ═══════════════════════════════════════════════════
+   BOTANICAL SVG FLOWERS (inline, no image needed)
+   Dùng lại ở nhiều section
+═══════════════════════════════════════════════════ */
+.botanical-top{position:absolute;top:0;left:0;right:0;height:220px;pointer-events:none;overflow:hidden}
+.botanical-bot{position:absolute;bottom:0;left:0;right:0;height:220px;pointer-events:none;overflow:hidden;transform:rotate(180deg)}
+.botanical-left{position:absolute;top:0;bottom:0;left:0;width:80px;pointer-events:none;overflow:hidden}
+.botanical-right{position:absolute;top:0;bottom:0;right:0;width:80px;pointer-events:none;overflow:hidden;transform:scaleX(-1)}
+
+/* ═══════════════════════════════════════════════════
+   OPENING
+═══════════════════════════════════════════════════ */
+#opening{
+  position:fixed;inset:0;z-index:999;
+  background:var(--white);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;transition:opacity 1.2s ease;
+  overflow:hidden;
+}
+#opening.hide{opacity:0;pointer-events:none}
+.op-botanical{position:absolute;inset:0;pointer-events:none}
+.op-title{
+  font-family:'Pinyon Script',cursive;
+  font-size:52px;color:var(--ink);
+  line-height:1;margin-bottom:6px;
+  position:relative;z-index:2;
+  animation:fadeUp 1.2s ease .2s both;
+}
+.op-names{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;letter-spacing:5px;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:48px;
+  position:relative;z-index:2;
+  animation:fadeUp 1.2s ease .5s both;
+}
+.op-tap{
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--muted);opacity:.5;
+  position:relative;z-index:2;
+  animation:blink 2s ease-in-out infinite;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:.8}}
+
+/* ═══════════════════════════════════════════════════
+   MUSIC BTN
+═══════════════════════════════════════════════════ */
+#music-btn{
+  position:fixed;top:20px;right:20px;z-index:500;
+  width:42px;height:42px;border-radius:50%;
+  background:var(--white);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+#music-btn:hover{background:var(--cream);border-color:var(--gold)}
+#music-btn svg{stroke:var(--muted);width:16px;height:16px;transition:stroke .3s}
+#music-btn:hover svg{stroke:var(--gold)}
+#music-btn.playing svg{animation:spin 4s linear infinite}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+/* ═══════════════════════════════════════════════════
+   LIGHTBOX
+═══════════════════════════════════════════════════ */
+.lb{position:fixed;inset:0;background:rgba(28,26,22,.96);z-index:9000;display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;cursor:pointer}
+.lb.open{display:flex}
+.lb-close{position:fixed;top:18px;right:22px;font-size:24px;color:var(--cream);cursor:pointer;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.08);transition:background .2s;z-index:9010}
+.lb-close:hover{background:rgba(255,255,255,.16)}
+.lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:var(--cream);font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9010;transition:background .2s}
+.lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.18)}
+.lb-prev{left:12px}.lb-next{right:12px}
+.lb-inner img{max-width:92vw;max-height:80vh;object-fit:contain;border-radius:4px;display:block}
+.lb-cap{margin-top:12px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:rgba(237,232,222,.5);letter-spacing:1px}
+.lb-counter{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:3px;color:rgba(237,232,222,.3)}
+
+/* ═══════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════ */
+.hero{
+  position:relative;min-height:100vh;
+  background:var(--white);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:60px 40px 80px;overflow:hidden;
+}
+.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;display:none}
+.hero-eyebrow{
+  font-size:9px;letter-spacing:6px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:28px;
+  position:relative;z-index:2;
+  opacity:0;animation:fadeUp 1s ease .3s both;
+}
+.hero-names-script{
+  font-family:'Pinyon Script',cursive;
+  font-size:72px;color:var(--ink);line-height:1;
+  position:relative;z-index:2;
+  opacity:0;animation:fadeUp 1s ease .6s both;
+}
+.hero-amp{
+  display:block;
+  font-family:'Cormorant Garamond',serif;
+  font-size:36px;font-style:italic;
+  color:var(--blush);line-height:1.1;
+}
+.hero-date-row{
+  display:flex;align-items:center;gap:12px;
+  margin-top:24px;position:relative;z-index:2;
+  opacity:0;animation:fadeUp 1s ease .9s both;
+}
+.hero-date-row::before,.hero-date-row::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(to right,transparent,rgba(154,124,63,.4));
+  max-width:56px;
+}
+.hero-date-row::after{background:linear-gradient(to left,transparent,rgba(154,124,63,.4))}
+.hero-date{font-size:12px;letter-spacing:4px;color:var(--gold);font-weight:300}
+.hero-venue{
+  margin-top:14px;font-family:'Cormorant Garamond',serif;
+  font-size:14px;font-style:italic;color:var(--muted);
+  letter-spacing:1px;position:relative;z-index:2;
+  opacity:0;animation:fadeUp 1s ease 1.1s both;
+}
+/* Ornament chân hero */
+.hero-ornament{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:10px;z-index:2;
+  opacity:0;animation:fadeUp 1s ease 1.3s both;
+}
+.hero-ornament::before,.hero-ornament::after{content:'';width:48px;height:1px;background:rgba(154,124,63,.3)}
+.hero-ornament span{font-size:14px;color:var(--blush);line-height:1}
+
+/* ═══════════════════════════════════════════════════
+   GENERIC SECTION
+═══════════════════════════════════════════════════ */
+.sec{padding:64px 36px;position:relative;overflow:hidden}
+.sec-pale{background:var(--pale)}
+.sec-cream{background:var(--cream)}
+.sec-white{background:var(--white)}
+.sec-ink{background:var(--ink);color:var(--cream)}
+.sec-sage{background:#2e3b2a;color:var(--cream)}
+.eyebrow{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.sec-ink .eyebrow{color:var(--gold2)}
+.sec-sage .eyebrow{color:rgba(196,163,90,.7)}
+.heading{font-family:'Cormorant Garamond',serif;font-size:34px;font-style:italic;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:4px}
+.sec-ink .heading,.sec-sage .heading{color:var(--cream)}
+.sub{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--muted);line-height:1.9;margin-top:10px}
+.sec-ink .sub,.sec-sage .sub{color:rgba(237,232,222,.6)}
+/* Divider bông */
+.floral-div{display:flex;align-items:center;gap:14px;margin:20px 0;justify-content:center}
+.floral-div::before,.floral-div::after{content:'';flex:1;height:1px;max-width:72px;background:linear-gradient(to right,transparent,rgba(154,124,63,.35))}
+.floral-div::after{background:linear-gradient(to left,transparent,rgba(154,124,63,.35))}
+.floral-div svg{width:18px;height:18px;flex-shrink:0}
+.sec-ink .floral-div::before,.sec-ink .floral-div::after{background:linear-gradient(to right,transparent,rgba(196,163,90,.3))}
+.sec-ink .floral-div::after{background:linear-gradient(to left,transparent,rgba(196,163,90,.3))}
+
+/* ═══════════════════════════════════════════════════
+   PORTRAIT SECTION
+═══════════════════════════════════════════════════ */
+.portrait-section{background:var(--cream);padding:0;position:relative}
+.portrait-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.portrait-item{position:relative;overflow:hidden}
+.portrait-inner{aspect-ratio:3/4;position:relative;overflow:hidden;background:var(--pale)}
+.portrait-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .7s ease;display:block}
+.portrait-item:hover img{transform:scale(1.04)}
+.portrait-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:rgba(107,99,88,.3);cursor:pointer}
+.portrait-ph svg{width:36px;height:36px;stroke:currentColor;stroke-width:1}
+.portrait-ph span{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(107,99,88,.4)}
+.portrait-overlay{position:absolute;bottom:0;left:0;right:0;padding:28px 16px 16px;background:linear-gradient(transparent,rgba(28,26,22,.75));text-align:center;z-index:2}
+.portrait-role{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(237,232,222,.6);margin-bottom:4px}
+.portrait-name{font-family:'Pinyon Script',cursive;font-size:28px;color:#fff;line-height:1}
+/* Portrait sway animation */
+.portrait-item{animation:pSway1 7s ease-in-out infinite;transform-origin:center top}
+.portrait-item:last-child{animation:pSway2 7s ease-in-out infinite}
+@keyframes pSway1{0%,100%{transform:rotate(0deg)}30%{transform:rotate(-.6deg)}70%{transform:rotate(.4deg)}}
+@keyframes pSway2{0%,100%{transform:rotate(0deg)}30%{transform:rotate(.6deg)}70%{transform:rotate(-.4deg)}}
+.portrait-item:hover{animation-play-state:paused}
+/* Ảnh đôi dưới */
+.couple-banner{position:relative;overflow:hidden;background:var(--pale)}
+.couple-banner-inner{aspect-ratio:16/7;position:relative;overflow:hidden}
+.couple-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.couple-banner-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:rgba(107,99,88,.25);cursor:pointer;border:1px dashed rgba(107,99,88,.15)}
+.couple-banner-ph svg{width:40px;height:40px;stroke:currentColor;stroke-width:1}
+.couple-banner-ph span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(107,99,88,.3);letter-spacing:2px}
+.couple-banner-overlay{position:absolute;inset:0;background:rgba(28,26,22,.15);display:flex;align-items:flex-end;justify-content:center;padding-bottom:20px;pointer-events:none;z-index:2}
+.couple-banner-overlay p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(253,250,245,.8);letter-spacing:3px}
+
+/* ═══════════════════════════════════════════════════
+   COUPLE NAMES SECTION
+═══════════════════════════════════════════════════ */
+.couple-names-wrap{text-align:center;padding:56px 36px}
+.cn-role{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.cn-name{font-family:'Pinyon Script',cursive;font-size:52px;color:var(--ink);line-height:1}
+.cn-amp{font-family:'Cormorant Garamond',serif;font-size:28px;font-style:italic;color:var(--blush);display:block;margin:4px 0}
+.cn-caption{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--muted);line-height:1.9;margin-top:16px}
+
+/* ═══════════════════════════════════════════════════
+   CHAPTER / STORY
+═══════════════════════════════════════════════════ */
+.chapter{padding:52px 36px;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.chapter-bg-num{
+  position:absolute;top:16px;right:12px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:100px;font-style:italic;font-weight:600;
+  color:rgba(154,124,63,.06);line-height:1;pointer-events:none;
+}
+.ch-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.ch-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-style:italic;color:var(--ink);margin-bottom:6px}
+.ch-date{display:inline-block;font-size:10px;letter-spacing:3px;color:var(--gold);border:1px solid rgba(154,124,63,.3);padding:4px 14px;border-radius:20px;margin-bottom:14px}
+.ch-text{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--muted);line-height:2}
+/* Chapter photos — Polaroid sway */
+.ch-photos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;padding:4px 0 12px}
+.ch-ph-wrap{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:3px;border:3px solid var(--white);box-shadow:0 6px 24px rgba(28,26,22,.14);background:var(--pale);cursor:pointer;transform-origin:center top}
+.ch-ph-wrap:first-child{transform:rotate(-2deg);animation:chSway1 7s ease-in-out infinite;transform-origin:center top}
+.ch-ph-wrap:last-child{transform:rotate(2deg);animation:chSway2 7s ease-in-out infinite;transform-origin:center top;margin-top:18px}
+@keyframes chSway1{0%,100%{transform:rotate(-2deg)}30%{transform:rotate(-3.8deg)}70%{transform:rotate(-1deg)}}
+@keyframes chSway2{0%,100%{transform:rotate(2deg)}30%{transform:rotate(3.8deg)}70%{transform:rotate(1deg)}}
+.ch-ph-wrap:hover{animation-play-state:paused}
+.ch-ph-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease;display:block;image-rendering:auto}
+.ch-ph-wrap:hover img{transform:scale(1.06)}
+.ch-ph-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:rgba(107,99,88,.3);cursor:pointer;padding:12px;text-align:center}
+.ch-ph-placeholder svg{width:26px;height:26px;stroke:currentColor;stroke-width:1.2}
+.ch-ph-placeholder span{font-size:9px;letter-spacing:2px;text-transform:uppercase;line-height:1.5;color:rgba(107,99,88,.4)}
+.ch-ph-cap{position:absolute;bottom:0;left:0;right:0;padding:20px 8px 8px;background:linear-gradient(transparent,rgba(28,26,22,.55));font-size:10px;color:rgba(237,232,222,.7);text-align:center;letter-spacing:1px}
+
+/* ═══════════════════════════════════════════════════
+   INVITATION LETTER
+═══════════════════════════════════════════════════ */
+.invite-letter{
+  background:var(--white);margin:0;padding:60px 36px;
+  position:relative;text-align:center;overflow:hidden;
+}
+.invite-letter::before{
+  content:'';position:absolute;inset:16px;
+  border:1px solid rgba(154,124,63,.15);
+  border-radius:2px;pointer-events:none;
+}
+.invite-letter::after{
+  content:'';position:absolute;inset:22px;
+  border:1px solid rgba(154,124,63,.07);
+  border-radius:2px;pointer-events:none;
+}
+.invite-to{font-family:'Pinyon Script',cursive;font-size:44px;color:var(--gold);margin-bottom:6px}
+.invite-body{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--muted);line-height:2.1;margin:16px 0}
+.invite-guest{
+  font-family:'Pinyon Script',cursive;font-size:40px;color:var(--ink);
+  display:block;margin:10px 0;
+  border-bottom:1px solid rgba(154,124,63,.3);
+  padding-bottom:6px;display:inline-block;min-width:180px;
+}
+.invite-from{margin-top:28px}
+.invite-from-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.invite-from-name{font-family:'Pinyon Script',cursive;font-size:36px;color:var(--blush)}
+
+/* ═══════════════════════════════════════════════════
+   SAVE THE DATE
+═══════════════════════════════════════════════════ */
+.save-date{background:var(--ink);color:var(--cream);padding:60px 36px;text-align:center;position:relative;overflow:hidden}
+.save-badge{display:inline-block;border:1px solid rgba(196,163,90,.4);padding:5px 18px;border-radius:20px;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold2);margin-bottom:24px}
+.save-big{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--cream);line-height:1;margin:10px 0;letter-spacing:2px}
+.save-weekday{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(237,232,222,.5);margin-bottom:6px}
+.save-lunar{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(237,232,222,.4);margin-bottom:28px}
+.save-venue-box{border:1px solid rgba(196,163,90,.2);border-radius:4px;padding:20px 20px;margin:20px 0;background:rgba(196,163,90,.04)}
+.save-venue-name{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold2);margin-bottom:6px}
+.save-venue-addr{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(237,232,222,.6);line-height:1.7}
+
+/* ═══════════════════════════════════════════════════
+   COUNTDOWN
+═══════════════════════════════════════════════════ */
+.countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:28px}
+.cd-box{background:rgba(196,163,90,.06);border:1px solid rgba(196,163,90,.15);border-radius:6px;padding:18px 6px;text-align:center}
+.cd-num{font-family:'Cormorant Garamond',serif;font-size:38px;color:var(--gold2);font-weight:400;line-height:1;display:block}
+.cd-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(237,232,222,.35);margin-top:4px;display:block}
+
+/* ═══════════════════════════════════════════════════
+   CALENDAR
+═══════════════════════════════════════════════════ */
+.cal-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(196,163,90,.15);border-radius:8px;padding:20px;margin-top:24px}
+.cal-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--cream);text-align:center;margin-bottom:14px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal-wd{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:rgba(237,232,222,.3);padding:4px 0}
+.cal-d{font-size:13px;color:rgba(237,232,222,.55);padding:6px 0;border-radius:4px}
+.cal-d.wedding{background:var(--gold2);color:var(--ink);font-weight:500;border-radius:50%;position:relative}
+.cal-d.wedding::after{content:'♥';position:absolute;top:-8px;right:-4px;font-size:8px;color:var(--blush)}
+
+/* ═══════════════════════════════════════════════════
+   ALBUM MARQUEE
+═══════════════════════════════════════════════════ */
+.album-section{background:var(--pale);padding:52px 0}
+.album-header{padding:0 36px 28px;text-align:center}
+:root{--album-speed:38s}
+.album-slider-wrap{
+  position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 10%,#000 90%,transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0%,#000 10%,#000 90%,transparent 100%);
+}
+.album-track{
+  display:flex;gap:12px;width:max-content;
+  padding:8px 0 16px;
+  animation:albumMarquee var(--album-speed) linear infinite;
+  will-change:transform;
+}
+.album-track.paused,.album-track:hover{animation-play-state:paused}
+@keyframes albumMarquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.album-card{
+  flex:0 0 auto;width:210px;height:280px;
+  position:relative;overflow:hidden;
+  border-radius:3px;
+  border:2px solid var(--white);
+  background:var(--cream);cursor:pointer;
+  box-shadow:0 4px 20px rgba(28,26,22,.1);
+  transition:transform .35s ease,box-shadow .35s ease;
+}
+.album-card:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 14px 36px rgba(28,26,22,.2)}
+.album-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s ease;display:block;image-rendering:auto;-ms-interpolation-mode:bicubic}
+.album-card:hover img{transform:scale(1.07)}
+.album-card-cap{position:absolute;bottom:0;left:0;right:0;padding:24px 10px 10px;background:linear-gradient(transparent,rgba(28,26,22,.65));font-size:10px;color:rgba(237,232,222,.7);text-align:center;letter-spacing:1px;font-family:'Jost',sans-serif}
+.album-card-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:rgba(107,99,88,.25);border:1px dashed rgba(107,99,88,.15);cursor:pointer;text-align:center;padding:16px}
+.album-card-ph svg{width:28px;height:28px;stroke:currentColor;stroke-width:1}
+.album-card-ph span{font-size:9px;letter-spacing:2px;text-transform:uppercase;line-height:1.5;color:rgba(107,99,88,.35)}
+.album-dots{display:flex;justify-content:center;gap:6px;margin-top:14px;padding:0 36px}
+.album-dot{width:5px;height:5px;border-radius:50%;background:rgba(154,124,63,.25)}
+.album-dot.active{background:var(--gold);width:16px;border-radius:3px}
+
+/* ═══════════════════════════════════════════════════
+   VIDEO
+═══════════════════════════════════════════════════ */
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;margin-top:28px;overflow:hidden;border-radius:6px;border:1px solid var(--border)}
+.video-wrap iframe,.video-wrap video{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+
+/* ═══════════════════════════════════════════════════
+   QR ENVELOPE
+═══════════════════════════════════════════════════ */
+.env-container{
+  width:280px;margin:32px auto 0;
+  position:relative;cursor:pointer;
+}
+.env-body{
+  background:var(--white);
+  border:1px solid rgba(154,124,63,.25);
+  border-radius:0 0 6px 6px;
+  border-top:none;
+  min-height:190px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.env-flap{
+  width:0;height:0;
+  border-left:140px solid transparent;
+  border-right:140px solid transparent;
+  border-top:80px solid var(--cream);
+  filter:drop-shadow(0 2px 0 rgba(154,124,63,.15));
+  transform-origin:top center;
+  transition:transform .8s cubic-bezier(.4,0,.2,1),opacity .6s ease;
+  position:relative;z-index:2;
+}
+.env-flap-back{
+  position:absolute;top:0;left:0;
+  width:0;height:0;
+  border-left:140px solid transparent;
+  border-right:140px solid transparent;
+  border-top:80px solid var(--pale);
+  z-index:1;
+}
+.env-lines{position:absolute;inset:0;pointer-events:none}
+.env-container.open .env-flap{transform:rotateX(180deg) translateY(-80px);opacity:.5}
+.env-qr{opacity:0;transform:translateY(16px);transition:opacity .5s ease .4s,transform .5s ease .4s;text-align:center;padding:20px 16px}
+.env-container.open .env-qr{opacity:1;transform:translateY(0)}
+.env-qr img{width:130px;height:130px;border-radius:4px;display:block;margin:0 auto}
+.env-qr p{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.env-seal{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--blush);
+  position:absolute;bottom:-19px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;z-index:10;
+  box-shadow:0 3px 12px rgba(196,133,122,.35);
+  transition:transform .3s;cursor:pointer;
+}
+.env-seal:hover{transform:translateX(-50%) scale(1.1)}
+.env-hint{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-align:center;margin-top:28px;animation:blink 2s infinite}
+
+/* ═══════════════════════════════════════════════════
+   MAP
+═══════════════════════════════════════════════════ */
+.map-iframe{width:100%;height:240px;border:none;border-radius:6px;filter:saturate(.85) contrast(.95);margin-top:24px;display:block}
+.map-cta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:10px 22px;background:var(--ink);color:var(--cream);border-radius:4px;font-size:10px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;transition:background .3s}
+.map-cta:hover{background:var(--sage)}
+
+/* ═══════════════════════════════════════════════════
+   CALL BUTTONS
+═══════════════════════════════════════════════════ */
+.call-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.call-card{background:rgba(255,255,255,.04);border:1px solid rgba(196,163,90,.15);border-radius:8px;padding:20px 12px;text-align:center}
+.call-role{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(237,232,222,.4);margin-bottom:6px}
+.call-name{font-family:'Pinyon Script',cursive;font-size:26px;color:var(--cream);margin-bottom:12px}
+.call-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;background:var(--gold2);color:var(--ink);border-radius:6px;font-size:11px;font-weight:500;letter-spacing:1px;text-decoration:none;transition:background .3s}
+.call-btn:hover{background:var(--blush2)}
+.call-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* ═══════════════════════════════════════════════════
+   RSVP
+═══════════════════════════════════════════════════ */
+.form-lbl{display:block;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.form-input,.form-select{width:100%;padding:11px 14px;background:var(--pale);border:1px solid var(--border);border-radius:4px;font-size:14px;font-family:'Jost',sans-serif;color:var(--ink);outline:none;transition:border-color .3s;margin-bottom:14px;appearance:none}
+.form-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6358' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer}
+.form-input:focus,.form-select:focus{border-color:var(--gold)}
+.form-textarea{width:100%;padding:11px 14px;background:var(--pale);border:1px solid var(--border);border-radius:4px;font-size:14px;font-family:'Jost',sans-serif;color:var(--ink);outline:none;resize:vertical;min-height:80px;transition:border-color .3s;margin-bottom:14px;display:block}
+.form-textarea:focus{border-color:var(--gold)}
+.submit-btn{width:100%;padding:13px;background:var(--ink);color:var(--cream);border:none;border-radius:4px;font-size:10px;letter-spacing:4px;text-transform:uppercase;font-family:'Jost',sans-serif;cursor:pointer;transition:background .3s}
+.submit-btn:hover{background:var(--sage)}
+
+/* ═══════════════════════════════════════════════════
+   NOTES
+═══════════════════════════════════════════════════ */
+.note-card{border-left:2px solid rgba(196,163,90,.4);padding:14px 16px;margin-bottom:12px;background:rgba(196,163,90,.04);border-radius:0 4px 4px 0}
+.note-card strong{font-size:11px;letter-spacing:1px;color:var(--gold2);display:block;margin-bottom:4px;font-style:normal}
+.note-card p{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(237,232,222,.65);line-height:1.8}
+
+/* ═══════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════ */
+.footer{background:var(--ink);padding:48px 36px;text-align:center}
+.footer-script{font-family:'Pinyon Script',cursive;font-size:38px;color:var(--cream);margin-bottom:6px}
+.footer-date{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(237,232,222,.3);margin-bottom:12px}
+.footer-credit{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(237,232,222,.18)}
+
+/* ═══════════════════════════════════════════════════
+   REVEAL + TOAST
+═══════════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--ink);color:var(--cream);padding:11px 26px;border-radius:40px;border:1px solid rgba(196,163,90,.3);font-size:12px;letter-spacing:1px;z-index:9999;transition:transform .4s ease;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <div class="lb-close" onclick="closeLB()">✕</div>
+  <div class="lb-prev" onclick="lbNav(-1)">&#8249;</div>
+  <div class="lb-inner"><img id="lb-img" src="" alt="" onclick="closeLB()"></div>
+  <div class="lb-next" onclick="lbNav(1)">&#8250;</div>
+  <p class="lb-cap" id="lb-cap"></p>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
+<!-- OPENING -->
+<div id="opening" onclick="openInvitation()">
+  <!-- Botanical SVG corners -->
+  <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" viewBox="0 0 480 800" xmlns="http://www.w3.org/2000/svg">
+    <!-- Top-left botanical -->
+    <g opacity=".18" fill="none" stroke="#4a5c44" stroke-width="1">
+      <path d="M0,120 Q40,80 20,40 Q60,60 80,20 Q70,60 100,50 Q80,90 120,80"/>
+      <ellipse cx="20" cy="40" rx="12" ry="18" transform="rotate(-30,20,40)" fill="#4a5c44" opacity=".4"/>
+      <ellipse cx="80" cy="20" rx="10" ry="16" transform="rotate(15,80,20)" fill="#4a5c44" opacity=".35"/>
+      <ellipse cx="100" cy="50" rx="14" ry="20" transform="rotate(-45,100,50)" fill="#4a5c44" opacity=".3"/>
+      <path d="M-10,80 Q30,100 10,140 Q50,110 70,150" stroke-width=".8" opacity=".6"/>
+      <!-- Rose bud -->
+      <circle cx="55" cy="5" r="8" fill="#c4857a" opacity=".5"/>
+      <circle cx="55" cy="5" r="5" fill="#d9a89f" opacity=".5"/>
+      <path d="M55,13 Q45,25 48,40" stroke="#4a5c44" stroke-width="1" fill="none" opacity=".7"/>
+    </g>
+    <!-- Top-right botanical -->
+    <g transform="translate(480,0) scale(-1,1)" opacity=".18" fill="none" stroke="#4a5c44" stroke-width="1">
+      <path d="M0,120 Q40,80 20,40 Q60,60 80,20 Q70,60 100,50 Q80,90 120,80"/>
+      <ellipse cx="20" cy="40" rx="12" ry="18" transform="rotate(-30,20,40)" fill="#4a5c44" opacity=".4"/>
+      <ellipse cx="80" cy="20" rx="10" ry="16" transform="rotate(15,80,20)" fill="#4a5c44" opacity=".35"/>
+      <path d="M-10,80 Q30,100 10,140 Q50,110 70,150" stroke-width=".8" opacity=".6"/>
+      <circle cx="55" cy="5" r="8" fill="#c4857a" opacity=".5"/>
+      <circle cx="55" cy="5" r="5" fill="#d9a89f" opacity=".5"/>
+    </g>
+    <!-- Bottom botanical -->
+    <g transform="translate(0,800) scale(1,-1)" opacity=".15" fill="none" stroke="#4a5c44" stroke-width="1">
+      <path d="M0,120 Q40,80 20,40 Q60,60 80,20 Q70,60 100,50 Q80,90 120,80"/>
+      <ellipse cx="20" cy="40" rx="12" ry="18" transform="rotate(-30,20,40)" fill="#4a5c44" opacity=".4"/>
+      <circle cx="55" cy="5" r="8" fill="#c4857a" opacity=".5"/>
+    </g>
+    <g transform="translate(480,800) scale(-1,-1)" opacity=".15" fill="none" stroke="#4a5c44" stroke-width="1">
+      <path d="M0,120 Q40,80 20,40 Q60,60 80,20 Q70,60 100,50 Q80,90 120,80"/>
+      <ellipse cx="20" cy="40" rx="12" ry="18" transform="rotate(-30,20,40)" fill="#4a5c44" opacity=".4"/>
+      <circle cx="55" cy="5" r="8" fill="#c4857a" opacity=".5"/>
+    </g>
+  </svg>
+  <p class="op-title">Wedding</p>
+  <p class="op-names" id="op-names"></p>
+  <p class="op-tap">✦ Chạm để mở thiệp ✦</p>
+</div>
+
+<!-- MUSIC -->
+<button id="music-btn" onclick="toggleMusic()" style="display:none">
+  <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+    <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+  </svg>
+</button>
+<audio id="bg-music" loop></audio>
+
+<div class="page" id="main-page" style="display:none">
+
+  <!-- ══ HERO ══ -->
+  <div class="hero">
+    <img class="hero-bg-img" id="hero-bg-img" src="" alt="">
+    <!-- Botanical corners -->
+    <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1" viewBox="0 0 480 800" xmlns="http://www.w3.org/2000/svg">
+      <g opacity=".1" fill="none" stroke="#4a5c44" stroke-width="1.2">
+        <path d="M0,160 Q50,110 25,55 Q75,80 100,25 Q88,75 130,65 Q100,115 150,100"/>
+        <ellipse cx="25" cy="55" rx="14" ry="22" transform="rotate(-30,25,55)" fill="#4a5c44" opacity=".5"/>
+        <ellipse cx="100" cy="25" rx="12" ry="20" transform="rotate(15,100,25)" fill="#4a5c44" opacity=".4"/>
+        <ellipse cx="130" cy="65" rx="16" ry="24" transform="rotate(-45,130,65)" fill="#4a5c44" opacity=".35"/>
+        <circle cx="68" cy="6" r="10" fill="#c4857a" opacity=".55"/>
+        <circle cx="68" cy="6" r="6" fill="#d9a89f" opacity=".5"/>
+        <path d="M68,16 Q55,32 60,52" stroke="#4a5c44" stroke-width="1" fill="none" opacity=".8"/>
+        <path d="M-10,100 Q40,130 12,180 Q65,140 90,195" stroke-width=".8" opacity=".5"/>
+      </g>
+      <g transform="translate(480,0) scale(-1,1)" opacity=".1" fill="none" stroke="#4a5c44" stroke-width="1.2">
+        <path d="M0,160 Q50,110 25,55 Q75,80 100,25 Q88,75 130,65 Q100,115 150,100"/>
+        <ellipse cx="25" cy="55" rx="14" ry="22" transform="rotate(-30,25,55)" fill="#4a5c44" opacity=".5"/>
+        <ellipse cx="100" cy="25" rx="12" ry="20" transform="rotate(15,100,25)" fill="#4a5c44" opacity=".4"/>
+        <circle cx="68" cy="6" r="10" fill="#c4857a" opacity=".55"/>
+        <circle cx="68" cy="6" r="6" fill="#d9a89f" opacity=".5"/>
+      </g>
+      <g transform="translate(0,800) scale(1,-1)" opacity=".08" fill="none" stroke="#4a5c44" stroke-width="1.2">
+        <path d="M0,160 Q50,110 25,55 Q75,80 100,25 Q88,75 130,65"/>
+        <ellipse cx="25" cy="55" rx="14" ry="22" transform="rotate(-30,25,55)" fill="#4a5c44" opacity=".5"/>
+        <circle cx="68" cy="6" r="10" fill="#c4857a" opacity=".55"/>
+      </g>
+      <g transform="translate(480,800) scale(-1,-1)" opacity=".08" fill="none" stroke="#4a5c44" stroke-width="1.2">
+        <path d="M0,160 Q50,110 25,55 Q75,80 100,25 Q88,75 130,65"/>
+        <ellipse cx="25" cy="55" rx="14" ry="22" transform="rotate(-30,25,55)" fill="#4a5c44" opacity=".5"/>
+        <circle cx="68" cy="6" r="10" fill="#c4857a" opacity=".55"/>
+      </g>
+    </svg>
+    <p class="hero-eyebrow" style="position:relative;z-index:3">Trân trọng kính mời</p>
+    <div class="hero-names-script" id="hero-names" style="position:relative;z-index:3"></div>
+    <div class="hero-date-row" style="position:relative;z-index:3">
+      <span class="hero-date" id="hero-date"></span>
+    </div>
+    <p class="hero-venue" id="hero-venue" style="position:relative;z-index:3"></p>
+    <div class="hero-ornament">
+      <span>✦</span>
+    </div>
+  </div>
+
+  <!-- ══ PORTRAIT ══ -->
+  <div class="portrait-section reveal">
+    <div class="portrait-grid">
+      <div class="portrait-item">
+        <div class="portrait-inner">
+          <div class="portrait-ph" id="groom-ph" onclick="hint('WC.groomPhoto')">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span>Ảnh Chú Rể</span>
+          </div>
+          <img id="groom-img" src="" alt="" style="display:none">
+        </div>
+        <div class="portrait-overlay">
+          <p class="portrait-role">Chú Rể</p>
+          <p class="portrait-name" id="portrait-groom"></p>
+        </div>
+      </div>
+      <div class="portrait-item">
+        <div class="portrait-inner">
+          <div class="portrait-ph" id="bride-ph" onclick="hint('WC.bridePhoto')">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span>Ảnh Cô Dâu</span>
+          </div>
+          <img id="bride-img" src="" alt="" style="display:none">
+        </div>
+        <div class="portrait-overlay">
+          <p class="portrait-role">Cô Dâu</p>
+          <p class="portrait-name" id="portrait-bride"></p>
+        </div>
+      </div>
+    </div>
+    <div class="couple-banner">
+      <div class="couple-banner-inner">
+        <div class="couple-banner-ph" id="couple-ph" onclick="hint('WC.couplePhoto')">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <span>Ảnh đôi</span>
+        </div>
+        <img id="couple-img" src="" alt="" style="display:none">
+        <div class="couple-banner-overlay"><p id="couple-caption"></p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ COUPLE NAMES ══ -->
+  <div class="couple-names-wrap sec-pale reveal">
+    <!-- Botanical divider -->
+    <svg viewBox="0 0 320 40" style="width:100%;max-width:320px;margin:0 auto 20px;display:block" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#4a5c44" stroke-width=".9" opacity=".4">
+        <line x1="0" y1="20" x2="115" y2="20"/>
+        <ellipse cx="130" cy="20" rx="8" ry="12" transform="rotate(-30,130,20)" fill="#4a5c44" opacity=".5"/>
+        <circle cx="160" cy="8" r="6" fill="#c4857a" opacity=".6"/>
+        <ellipse cx="190" cy="20" rx="8" ry="12" transform="rotate(30,190,20)" fill="#4a5c44" opacity=".5"/>
+        <line x1="205" y1="20" x2="320" y2="20"/>
+      </g>
+    </svg>
+    <p class="cn-role">Chú Rể</p>
+    <p class="cn-name" id="cn-groom"></p>
+    <span class="cn-amp">&amp;</span>
+    <p class="cn-role">Cô Dâu</p>
+    <p class="cn-name" id="cn-bride"></p>
+    <svg viewBox="0 0 320 40" style="width:100%;max-width:320px;margin:20px auto 0;display:block;transform:rotate(180deg)" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#4a5c44" stroke-width=".9" opacity=".4">
+        <line x1="0" y1="20" x2="115" y2="20"/>
+        <ellipse cx="130" cy="20" rx="8" ry="12" transform="rotate(-30,130,20)" fill="#4a5c44" opacity=".5"/>
+        <circle cx="160" cy="8" r="6" fill="#c4857a" opacity=".6"/>
+        <ellipse cx="190" cy="20" rx="8" ry="12" transform="rotate(30,190,20)" fill="#4a5c44" opacity=".5"/>
+        <line x1="205" y1="20" x2="320" y2="20"/>
+      </g>
+    </svg>
+    <p class="cn-caption">Tôi thấy mình thật may mắn khi được bên em,<br>nhìn thế giới bằng đôi mắt em.</p>
+  </div>
+
+  <!-- ══ STORY ══ -->
+  <div style="background:var(--white)">
+    <!-- Chapter 1 -->
+    <div class="chapter reveal">
+      <div class="chapter-bg-num">1</div>
+      <p class="ch-label">Chương I</p>
+      <h3 class="ch-title">Gặp gỡ</h3>
+      <span class="ch-date">2019 · 08 · 08</span>
+      <p class="ch-text">Gặp được em là khởi đầu cho mọi điều tốt đẹp trong đời tôi.<br>Em là người tôi yêu không chút do dự — bằng tất cả chân thành.</p>
+      <div class="ch-photos">
+        <div class="ch-ph-wrap" onclick="chClick('ch1p1','ch1Photo1','Lần đầu gặp nhau')">
+          <div class="ch-ph-placeholder" id="ch1p1-ph" onclick="hint('WC.ch1Photo1')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Ảnh kỷ niệm 1</span></div>
+          <img id="ch1p1" src="" alt="" style="display:none">
+          <div class="ch-ph-cap">Lần đầu gặp nhau</div>
+        </div>
+        <div class="ch-ph-wrap" onclick="chClick('ch1p2','ch1Photo2','Kỷ niệm đặc biệt')">
+          <div class="ch-ph-placeholder" id="ch1p2-ph" onclick="hint('WC.ch1Photo2')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Ảnh kỷ niệm 2</span></div>
+          <img id="ch1p2" src="" alt="" style="display:none">
+          <div class="ch-ph-cap">Kỷ niệm đặc biệt</div>
+        </div>
+      </div>
+    </div>
+    <!-- Chapter 2 -->
+    <div class="chapter reveal" style="background:var(--pale)">
+      <div class="chapter-bg-num">2</div>
+      <p class="ch-label">Chương II</p>
+      <h3 class="ch-title">Tình yêu</h3>
+      <span class="ch-date">2019 – 2026</span>
+      <p class="ch-text">Chúng mình đã nắm tay nhau đi qua bao cảnh sắc khác nhau.<br>Và khi ngoảnh lại… em vẫn luôn ở đó bên tôi.</p>
+      <div class="ch-photos">
+        <div class="ch-ph-wrap" onclick="chClick('ch2p1','ch2Photo1','Khoảnh khắc yêu')">
+          <div class="ch-ph-placeholder" id="ch2p1-ph" onclick="hint('WC.ch2Photo1')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Ảnh kỷ niệm 1</span></div>
+          <img id="ch2p1" src="" alt="" style="display:none">
+          <div class="ch-ph-cap">Khoảnh khắc yêu</div>
+        </div>
+        <div class="ch-ph-wrap" onclick="chClick('ch2p2','ch2Photo2','Tình yêu đẹp')">
+          <div class="ch-ph-placeholder" id="ch2p2-ph" onclick="hint('WC.ch2Photo2')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Ảnh kỷ niệm 2</span></div>
+          <img id="ch2p2" src="" alt="" style="display:none">
+          <div class="ch-ph-cap">Tình yêu đẹp</div>
+        </div>
+      </div>
+    </div>
+    <!-- Chapter 3 -->
+    <div class="chapter reveal">
+      <div class="chapter-bg-num">3</div>
+      <p class="ch-label">Chương III</p>
+      <h3 class="ch-title">Bên nhau</h3>
+      <span class="ch-date" id="ch3-date"></span>
+      <p class="ch-text">Chúng mình đã có câu trả lời cho tương lai.<br>Bên nhau — qua hoàng hôn và bốn mùa.</p>
+      <div class="ch-photos">
+        <div class="ch-ph-wrap" onclick="chClick('ch3p1','ch3Photo1','Ngày trọng đại')">
+          <div class="ch-ph-placeholder" id="ch3p1-ph" onclick="hint('WC.ch3Photo1')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Ảnh ngày cưới 1</span></div>
+          <img id="ch3p1" src="" alt="" style="display:none">
+          <div class="ch-ph-cap">Ngày trọng đại</div>
+        </div>
+        <div class="ch-ph-wrap" onclick="chClick('ch3p2','ch3Photo2','Hạnh phúc mãi mãi')">
+          <div class="ch-ph-placeholder" id="ch3p2-ph" onclick="hint('WC.ch3Photo2')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Ảnh ngày cưới 2</span></div>
+          <img id="ch3p2" src="" alt="" style="display:none">
+          <div class="ch-ph-cap">Hạnh phúc mãi mãi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ INVITATION LETTER ══ -->
+  <div class="invite-letter reveal">
+    <svg viewBox="0 0 320 32" style="width:100%;max-width:280px;margin:0 auto 20px;display:block;position:relative;z-index:1" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#4a5c44" stroke-width=".8" opacity=".35">
+        <line x1="0" y1="16" x2="120" y2="16"/>
+        <ellipse cx="135" cy="16" rx="7" ry="10" transform="rotate(-25,135,16)" fill="#4a5c44" opacity=".5"/>
+        <circle cx="160" cy="4" r="5" fill="#c4857a" opacity=".6"/>
+        <ellipse cx="185" cy="16" rx="7" ry="10" transform="rotate(25,185,16)" fill="#4a5c44" opacity=".5"/>
+        <line x1="200" y1="16" x2="320" y2="16"/>
+      </g>
+    </svg>
+    <p class="invite-to" style="position:relative;z-index:1">Kính gửi</p>
+    <p class="invite-body" style="position:relative;z-index:1">
+      Trong ngày trọng đại nhất cuộc đời,<br>
+      chúng mình trân trọng kính mời
+    </p>
+    <span class="invite-guest" id="invite-guest" style="position:relative;z-index:1"></span>
+    <p class="invite-body" style="position:relative;z-index:1">đến chung vui trong lễ cưới của chúng mình.</p>
+    <div class="invite-from" style="position:relative;z-index:1">
+      <p class="invite-from-label">Trân trọng</p>
+      <p class="invite-from-name" id="invite-from"></p>
+    </div>
+  </div>
+
+  <!-- ══ SAVE THE DATE ══ -->
+  <div class="save-date reveal">
+    <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.06" viewBox="0 0 480 500" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#c4a35a" stroke-width="1">
+        <path d="M0,200 Q60,140 30,70 Q90,100 120,30 Q105,90 160,80 Q120,140 180,120"/>
+        <ellipse cx="30" cy="70" rx="16" ry="26" transform="rotate(-30,30,70)" fill="#c4a35a" opacity=".6"/>
+        <circle cx="82" cy="8" r="12" fill="#c4857a" opacity=".7"/>
+        <g transform="translate(480,0) scale(-1,1)">
+          <path d="M0,200 Q60,140 30,70 Q90,100 120,30 Q105,90 160,80"/>
+          <ellipse cx="30" cy="70" rx="16" ry="26" transform="rotate(-30,30,70)" fill="#c4a35a" opacity=".6"/>
+          <circle cx="82" cy="8" r="12" fill="#c4857a" opacity=".7"/>
+        </g>
+      </g>
+    </svg>
+    <span class="save-badge">Save the Date</span>
+    <p class="save-weekday" id="save-weekday"></p>
+    <p class="save-big" id="save-big"></p>
+    <p class="save-lunar" id="save-lunar"></p>
+    <div class="floral-div" style="margin:24px 0">
+      <svg viewBox="0 0 20 20" fill="none" stroke="rgba(196,163,90,.5)" stroke-width="1">
+        <circle cx="10" cy="10" r="4"/>
+        <line x1="10" y1="2" x2="10" y2="6"/><line x1="10" y1="14" x2="10" y2="18"/>
+        <line x1="2" y1="10" x2="6" y2="10"/><line x1="14" y1="10" x2="18" y2="10"/>
+      </svg>
+    </div>
+    <div class="save-venue-box">
+      <p class="save-venue-name" id="save-venue-name"></p>
+      <p class="save-venue-addr" id="save-venue-addr"></p>
+    </div>
+    <!-- Countdown -->
+    <div class="countdown-grid">
+      <div class="cd-box"><span class="cd-num" id="cd-days">00</span><span class="cd-lbl">Ngày</span></div>
+      <div class="cd-box"><span class="cd-num" id="cd-hours">00</span><span class="cd-lbl">Giờ</span></div>
+      <div class="cd-box"><span class="cd-num" id="cd-mins">00</span><span class="cd-lbl">Phút</span></div>
+      <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-lbl">Giây</span></div>
+    </div>
+    <!-- Calendar -->
+    <div class="cal-wrap">
+      <p class="cal-title" id="cal-title"></p>
+      <div class="cal-grid" id="cal-grid"></div>
+    </div>
+  </div>
+
+  <!-- ══ ALBUM ══ -->
+  <div class="album-section reveal">
+    <div class="album-header">
+      <p class="eyebrow">Khoảnh Khắc</p>
+      <h2 class="heading">Album Hình Ảnh</h2>
+      <div class="floral-div">
+        <svg viewBox="0 0 20 20" fill="none" stroke="rgba(154,124,63,.5)" stroke-width="1">
+          <ellipse cx="10" cy="10" rx="4" ry="7" transform="rotate(-30,10,10)" fill="rgba(74,92,68,.3)"/>
+          <ellipse cx="10" cy="10" rx="4" ry="7" transform="rotate(30,10,10)" fill="rgba(74,92,68,.3)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="album-slider-wrap">
+      <div class="album-track" id="album-track"></div>
+    </div>
+    <div class="album-dots" id="album-dots"></div>
+  </div>
+
+  <!-- ══ VIDEO ══ -->
+  <div class="sec sec-pale reveal">
+    <p class="eyebrow">Thước Phim</p>
+    <h2 class="heading">Pre-Wedding Video</h2>
+    <div class="floral-div">
+      <svg viewBox="0 0 20 20" fill="none" stroke="rgba(154,124,63,.5)" stroke-width="1">
+        <circle cx="10" cy="10" r="4" fill="rgba(196,133,122,.3)"/>
+        <line x1="2" y1="10" x2="6" y2="10"/><line x1="14" y1="10" x2="18" y2="10"/>
+      </svg>
+    </div>
+    <div class="video-wrap" id="video-wrap"></div>
+  </div>
+
+  <!-- ══ MAP ══ -->
+  <div class="sec sec-cream reveal" style="text-align:center">
+    <p class="eyebrow">Địa Điểm</p>
+    <h2 class="heading">Bản Đồ Chỉ Đường</h2>
+    <div class="floral-div">
+      <svg viewBox="0 0 20 20" fill="none" stroke="rgba(154,124,63,.5)" stroke-width="1">
+        <path d="M10 2 C6 2 3 5 3 9 C3 14 10 19 10 19 C10 19 17 14 17 9 C17 5 14 2 10 2Z"/>
+        <circle cx="10" cy="9" r="3" fill="rgba(196,133,122,.4)"/>
+      </svg>
+    </div>
+    <p id="map-addr" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--muted);margin-bottom:0"></p>
+    <iframe class="map-iframe" id="map-iframe" src="" allowfullscreen loading="lazy"></iframe>
+    <a class="map-cta" id="map-cta" href="#" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+      Mở Google Maps
+    </a>
+  </div>
+
+  <!-- ══ QR ENVELOPE ══ -->
+  <div class="sec sec-pale reveal" style="text-align:center">
+    <p class="eyebrow">Hộp Mừng Cưới</p>
+    <h2 class="heading">Gửi gắm yêu thương</h2>
+    <p class="sub" style="margin-bottom:0">Chạm vào phong bì để mở mã QR nhé!</p>
+    <div class="env-container" id="env-container" onclick="openEnvelope()">
+      <div style="position:relative;height:80px">
+        <div class="env-flap-back"></div>
+        <div class="env-flap" id="env-flap"></div>
+      </div>
+      <div class="env-body">
+        <div id="env-closed" style="text-align:center;padding:40px 20px">
+          <svg width="32" height="28" viewBox="0 0 32 28" fill="none" stroke="rgba(154,124,63,.3)" stroke-width="1"><rect x="1" y="4" width="30" height="22" rx="2"/><polyline points="1,4 16,17 31,4"/></svg>
+          <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(154,124,63,.4);margin-top:10px">Nhấn để mở</p>
+        </div>
+        <div class="env-qr" id="env-qr">
+          <img id="qr-img" src="" alt="QR">
+          <p>Quét mã để chia sẻ thiệp</p>
+        </div>
+      </div>
+      <div class="env-seal" id="env-seal">♥</div>
+    </div>
+    <p class="env-hint" id="env-hint">✦ Nhấn vào phong bì để mở ✦</p>
+  </div>
+
+  <!-- ══ CALL BUTTONS ══ -->
+  <div class="sec sec-ink reveal">
+    <p class="eyebrow">Liên Hệ</p>
+    <h2 class="heading">Có điều gì cần hỏi?</h2>
+    <p class="sub">Hãy gọi cho chúng mình!</p>
+    <div class="call-grid">
+      <div class="call-card">
+        <p class="call-role">Chú Rể</p>
+        <p class="call-name" id="call-groom-name"></p>
+        <a class="call-btn" id="call-groom" href="#">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 9.84a19.79 19.79 0 01-3.07-8.67A2 2 0 011.9 3h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 18z"/></svg>
+          Gọi ngay
+        </a>
+      </div>
+      <div class="call-card">
+        <p class="call-role">Cô Dâu</p>
+        <p class="call-name" id="call-bride-name"></p>
+        <a class="call-btn" id="call-bride" href="#">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 9.84a19.79 19.79 0 01-3.07-8.67A2 2 0 011.9 3h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 18z"/></svg>
+          Gọi ngay
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ RSVP ══ -->
+  <div class="sec sec-white reveal">
+    <p class="eyebrow" style="text-align:center">RSVP</p>
+    <h2 class="heading" style="text-align:center">Xác nhận tham dự</h2>
+    <div class="floral-div" style="margin-bottom:28px">
+      <svg viewBox="0 0 20 20" fill="none" stroke="rgba(154,124,63,.4)" stroke-width="1">
+        <ellipse cx="10" cy="10" rx="4" ry="7" transform="rotate(-30,10,10)" fill="rgba(74,92,68,.25)"/>
+        <ellipse cx="10" cy="10" rx="4" ry="7" transform="rotate(30,10,10)" fill="rgba(74,92,68,.25)"/>
+      </svg>
+    </div>
+    <label class="form-lbl">Họ và tên</label>
+    <input class="form-input" type="text" placeholder="Nhập họ và tên..." id="rsvp-name">
+    <label class="form-lbl">Bạn sẽ tham dự chứ?</label>
+    <select class="form-select" id="rsvp-attend">
+      <option value="">— Chọn câu trả lời —</option>
+      <option value="yes">Có, tôi sẽ tham dự ♥</option>
+      <option value="no">Tôi bận, rất tiếc không thể</option>
+    </select>
+    <button class="submit-btn" onclick="submitRsvp()">Gửi Xác Nhận</button>
+  </div>
+
+  <!-- ══ NOTES ══ -->
+  <div class="sec sec-ink reveal">
+    <p class="eyebrow">Lưu Ý</p>
+    <div class="note-card"><strong>Các bạn ở xa</strong><p>Xin vui lòng báo trước để chúng mình có thể sắp xếp chỗ ở chu đáo!</p></div>
+    <div class="note-card"><strong>Lưu ý đặc biệt 😄</strong><p>Nếu chụp ảnh cùng cô dâu chú rể, xin vui lòng "chỉnh sửa" cho đẹp một chút nhé!</p></div>
+    <div class="note-card"><p>Nếu có điều gì sơ suất trong việc tiếp đón, mong các bạn thông cảm bỏ qua cho!</p></div>
+  </div>
+
+  <!-- ══ WISHES ══ -->
+  <div class="sec sec-pale reveal" style="text-align:center">
+    <p class="eyebrow">Lời Chúc</p>
+    <h2 class="heading">Gửi lời chúc mừng</h2>
+    <div class="floral-div"><div style="width:6px;height:6px;background:var(--blush);border-radius:50%"></div></div>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--muted);margin-bottom:0">Hãy để lại những lời chúc yêu thương nhất!</p>
+    <textarea class="form-textarea" style="margin-top:16px" placeholder="Viết lời chúc của bạn..."></textarea>
+    <button class="submit-btn" style="width:auto;padding:12px 32px;border-radius:24px;background:var(--sage)" onclick="sendWish()">Gửi lời chúc ♥</button>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="footer">
+    <svg viewBox="0 0 320 50" style="width:100%;max-width:300px;margin:0 auto 16px;display:block" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#4a5c44" stroke-width=".8" opacity=".3">
+        <line x1="0" y1="25" x2="110" y2="25"/>
+        <ellipse cx="126" cy="25" rx="9" ry="14" transform="rotate(-25,126,25)" fill="#4a5c44" opacity=".5"/>
+        <circle cx="160" cy="8" r="8" fill="#c4857a" opacity=".5"/>
+        <ellipse cx="194" cy="25" rx="9" ry="14" transform="rotate(25,194,25)" fill="#4a5c44" opacity=".5"/>
+        <line x1="210" y1="25" x2="320" y2="25"/>
+      </g>
+    </svg>
+    <p class="footer-script" id="footer-names"></p>
+    <p class="footer-date" id="footer-date"></p>
+    <p class="footer-credit">made with love</p>
+  </div>
+
+</div><!-- end .page -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   COMPRESS
+══════════════════════════════════════════════════════ */
+const MAX_W=1400,IMG_Q=.85;
+function compressImage(src){
+  return new Promise(r=>{
+    if(!src||src===''||src.startsWith('data:')){r(src);return}
+    const img=new Image();img.crossOrigin='anonymous';
+    img.onload=()=>{
+      let w=img.naturalWidth,h=img.naturalHeight;
+      if(w<=MAX_W){r(src);return}
+      h=Math.round(h*MAX_W/w);w=MAX_W;
+      const cv=document.createElement('canvas');cv.width=w;cv.height=h;
+      const ctx=cv.getContext('2d');
+      ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+      ctx.drawImage(img,0,0,w,h);
+      r(cv.toDataURL('image/jpeg',IMG_Q));
+    };
+    img.onerror=()=>r(src);img.src=src;
+  });
+}
+async function applyImg(imgEl,phEl,src){
+  if(!src)return;
+  if(phEl)phEl.style.display='none';
+  const out=await compressImage(src);
+  imgEl.src=out;imgEl.style.display='block';
+}
+
+/* ══════════════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════════════ */
+let albumImages=[];
+function init(){
+  const C=WC;
+  // Texts
+  document.getElementById('op-names').textContent=C.groomShort+' & '+C.brideShort;
+  document.getElementById('hero-names').innerHTML=C.groomShort+'<span class="hero-amp">&amp;</span>'+C.brideShort;
+  document.getElementById('hero-date').textContent=C.dateDisplay;
+  document.getElementById('hero-venue').textContent=C.venueName+' · '+C.weddingTime;
+  document.getElementById('portrait-groom').textContent=C.groomFull;
+  document.getElementById('portrait-bride').textContent=C.brideFull;
+  document.getElementById('couple-caption').textContent=C.groomShort+' & '+C.brideShort;
+  document.getElementById('cn-groom').textContent=C.groomShort;
+  document.getElementById('cn-bride').textContent=C.brideShort;
+  document.getElementById('ch3-date').textContent=C.dateDisplay;
+  const guest=new URLSearchParams(location.search).get('name')||C.defaultGuest;
+  document.getElementById('invite-guest').textContent=guest;
+  document.getElementById('invite-from').textContent=C.groomShort+' & '+C.brideShort;
+  document.getElementById('save-weekday').textContent=C.weekday;
+  document.getElementById('save-big').textContent=C.dateDisplay;
+  document.getElementById('save-lunar').textContent=C.lunar;
+  document.getElementById('save-venue-name').textContent=C.venueName;
+  document.getElementById('save-venue-addr').textContent=C.venueAddress;
+  document.getElementById('map-addr').textContent=C.venueAddress;
+  document.getElementById('map-iframe').src=C.mapsEmbed;
+  document.getElementById('map-cta').href=C.mapsUrl;
+  document.getElementById('call-groom-name').textContent=C.groomShort;
+  document.getElementById('call-bride-name').textContent=C.brideShort;
+  document.getElementById('call-groom').href='tel:'+C.phoneGroom;
+  document.getElementById('call-bride').href='tel:'+C.phoneBride;
+  document.getElementById('footer-names').textContent=C.groomShort+' & '+C.brideShort;
+  document.getElementById('footer-date').textContent=C.dateDisplay;
+  if(C.musicUrl)document.getElementById('bg-music').src=C.musicUrl;
+  document.getElementById('qr-img').src='https://api.qrserver.com/v1/create-qr-code/?size=140x140&margin=6&data='+encodeURIComponent(C.qrUrl);
+
+  // Photos
+  applyImg(document.getElementById('hero-bg-img'),null,C.heroPhoto).then(()=>{if(C.heroPhoto)document.getElementById('hero-bg-img').style.display='block'});
+  applyImg(document.getElementById('groom-img'),document.getElementById('groom-ph'),C.groomPhoto);
+  applyImg(document.getElementById('bride-img'),document.getElementById('bride-ph'),C.bridePhoto);
+  if(C.couplePhoto){applyImg(document.getElementById('couple-img'),document.getElementById('couple-ph'),C.couplePhoto)}
+  setChImg('ch1p1','ch1p1-ph',C.ch1Photo1);setChImg('ch1p2','ch1p2-ph',C.ch1Photo2);
+  setChImg('ch2p1','ch2p1-ph',C.ch2Photo1);setChImg('ch2p2','ch2p2-ph',C.ch2Photo2);
+  setChImg('ch3p1','ch3p1-ph',C.ch3Photo1);setChImg('ch3p2','ch3p2-ph',C.ch3Photo2);
+
+  buildAlbum();buildVideo();buildCalendar();
+
+  // Countdown
+  setInterval(tickCountdown,1000);tickCountdown();
+
+  // Album speed
+  document.documentElement.style.setProperty('--album-speed',C.albumSpeed||'38s');
+}
+
+function setChImg(imgId,phId,src){
+  if(!src)return;
+  const img=document.getElementById(imgId),ph=document.getElementById(phId);
+  if(ph)ph.style.display='none';
+  compressImage(src).then(out=>{img.src=out;img.style.display='block'});
+}
+
+/* ══════════════════════════════════════════════════════
+   ALBUM
+══════════════════════════════════════════════════════ */
+function buildAlbum(){
+  albumImages=WC.album;
+  const track=document.getElementById('album-track');
+  const dots=document.getElementById('album-dots');
+  track.innerHTML='';dots.innerHTML='';
+  const cards=[];
+  albumImages.forEach((a,i)=>{
+    const card=document.createElement('div');card.className='album-card';card.dataset.index=i;
+    if(a.src){
+      const img=document.createElement('img');img.alt=a.cap||'';img.draggable=false;
+      img.src=a.src;card.appendChild(img);
+      const cap=document.createElement('div');cap.className='album-card-cap';cap.textContent=a.cap||'';card.appendChild(cap);
+      card.onclick=()=>openLB(i);
+      cards.push({img,src:a.src});
+    }else{
+      const ph=document.createElement('div');ph.className='album-card-ph';
+      ph.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Ảnh '+(i+1)+'</span>';
+      ph.onclick=()=>hint('album['+i+'].src');card.appendChild(ph);
+    }
+    track.appendChild(card);
+    const dot=document.createElement('div');dot.className='album-dot'+(i===0?' active':'');dots.appendChild(dot);
+  });
+  const origCards=Array.from(track.children);
+  origCards.forEach(c=>{
+    const cl=c.cloneNode(true);
+    const idx=parseInt(cl.dataset.index);
+    if(!isNaN(idx)&&albumImages[idx]?.src)cl.onclick=()=>openLB(idx);
+    track.appendChild(cl);
+  });
+  cards.forEach(({img,src})=>{
+    compressImage(src).then(out=>{
+      if(out!==src){
+        img.src=out;
+        const idx=img.closest('.album-card')?.dataset.index;
+        if(idx!==undefined)track.querySelectorAll('.album-card[data-index="'+idx+'"] img').forEach(el=>el.src=out);
+      }
+    });
+  });
+  _bindPause(track);
+}
+function _bindPause(t){
+  const p=()=>t.classList.add('paused'),r=()=>t.classList.remove('paused');
+  t.addEventListener('mouseenter',p,{passive:true});t.addEventListener('mouseleave',r,{passive:true});
+  t.addEventListener('touchstart',p,{passive:true});t.addEventListener('touchend',()=>setTimeout(r,800),{passive:true});
+  document.addEventListener('visibilitychange',()=>{document.hidden?p():r()});
+}
+
+/* ══════════════════════════════════════════════════════
+   LIGHTBOX
+══════════════════════════════════════════════════════ */
+let _lbIdx=-1;
+function openLB(indexOrSrc,cap){
+  const el=document.getElementById('lb'),img=document.getElementById('lb-img');
+  if(typeof indexOrSrc==='number'){
+    _lbIdx=indexOrSrc;
+    const a=albumImages[_lbIdx];
+    img.src=a.src||'';
+    document.getElementById('lb-cap').textContent=a.cap||'';
+    document.getElementById('lb-counter').textContent=(_lbIdx+1)+' / '+albumImages.filter(a=>a.src).length;
+  }else{
+    _lbIdx=-1;img.src=indexOrSrc;
+    document.getElementById('lb-cap').textContent=cap||'';
+    document.getElementById('lb-counter').textContent='';
+  }
+  el.classList.add('open');document.body.style.overflow='hidden';
+}
+function closeLB(){document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
+function lbNav(dir){
+  if(_lbIdx<0)return;
+  const v=albumImages.map((a,i)=>({a,i})).filter(({a})=>a.src);
+  const pos=v.findIndex(({i})=>i===_lbIdx);
+  const nx=v[(pos+dir+v.length)%v.length];
+  if(nx)openLB(nx.i);
+}
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lb').classList.contains('open'))return;
+  if(e.key==='Escape')closeLB();
+  if(e.key==='ArrowRight')lbNav(1);
+  if(e.key==='ArrowLeft')lbNav(-1);
+});
+(()=>{let tx=0;document.getElementById('lb').addEventListener('touchstart',e=>{tx=e.changedTouches[0].clientX},{passive:true});document.getElementById('lb').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)lbNav(dx<0?1:-1)},{passive:true})})();
+
+/* ══════════════════════════════════════════════════════
+   VIDEO
+══════════════════════════════════════════════════════ */
+function buildVideo(){
+  const w=document.getElementById('video-wrap');
+  if(WC.videoType==='mp4')w.innerHTML='<video controls src="'+WC.videoEmbed+'"></video>';
+  else w.innerHTML='<iframe src="'+WC.videoEmbed+'" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>';
+}
+
+/* ══════════════════════════════════════════════════════
+   CALENDAR + COUNTDOWN
+══════════════════════════════════════════════════════ */
+function buildCalendar(){
+  const wd=new Date(WC.weddingDate);
+  const months=['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
+  document.getElementById('cal-title').textContent=months[wd.getMonth()]+' · '+wd.getFullYear();
+  const g=document.getElementById('cal-grid');
+  ['CN','T2','T3','T4','T5','T6','T7'].forEach(d=>{const e=document.createElement('div');e.className='cal-wd';e.textContent=d;g.appendChild(e)});
+  const first=new Date(wd.getFullYear(),wd.getMonth(),1).getDay();
+  const total=new Date(wd.getFullYear(),wd.getMonth()+1,0).getDate();
+  for(let i=0;i<first;i++){const e=document.createElement('div');g.appendChild(e)}
+  for(let d=1;d<=total;d++){const e=document.createElement('div');e.className='cal-d';e.textContent=d;if(d===wd.getDate())e.classList.add('wedding');g.appendChild(e)}
+}
+function tickCountdown(){
+  const diff=new Date(WC.weddingDate)-Date.now();
+  if(diff<=0){['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id=>document.getElementById(id).textContent='00');return}
+  document.getElementById('cd-days').textContent=String(Math.floor(diff/86400000)).padStart(2,'0');
+  document.getElementById('cd-hours').textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-mins').textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cd-secs').textContent=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+}
+
+/* ══════════════════════════════════════════════════════
+   ENVELOPE / QR
+══════════════════════════════════════════════════════ */
+let envOpen=false;
+function openEnvelope(){
+  if(envOpen)return;envOpen=true;
+  document.getElementById('env-flap').style.transform='rotateX(180deg) translateY(-80px)';
+  document.getElementById('env-flap').style.opacity='.4';
+  document.getElementById('env-closed').style.display='none';
+  document.getElementById('env-hint').style.display='none';
+  document.getElementById('env-seal').textContent='✓';
+  setTimeout(()=>document.getElementById('env-qr').classList.add('...'),100);
+  document.getElementById('env-qr').style.opacity='1';
+  document.getElementById('env-qr').style.transform='translateY(0)';
+  document.getElementById('env-qr').style.transition='opacity .6s ease .3s, transform .6s ease .3s';
+}
+
+/* ══════════════════════════════════════════════════════
+   CHAPTER PHOTO CLICK
+══════════════════════════════════════════════════════ */
+function chClick(imgId,cfgKey,cap){
+  const img=document.getElementById(imgId);
+  if(img&&img.src&&!img.src.endsWith('/')&&!img.src.endsWith('#'))openLB(img.src,cap);
+}
+
+/* ══════════════════════════════════════════════════════
+   OPENING + MUSIC
+══════════════════════════════════════════════════════ */
+function openInvitation(){
+  document.getElementById('opening').classList.add('hide');
+  setTimeout(()=>{
+    document.getElementById('opening').style.display='none';
+    document.getElementById('main-page').style.display='block';
+    document.getElementById('music-btn').style.display='flex';
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    musicPlay();
+  },1000);
+}
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1});
+
+let musicOn=false,musicReady=false;
+const _aud=document.getElementById('bg-music');
+function musicPlay(){if(!_aud.src)return;_aud.play().then(()=>{musicOn=true;musicReady=true;_syncBtn()}).catch(()=>{musicOn=false;_syncBtn()})}
+function musicPause(){_aud.pause();musicOn=false;_syncBtn()}
+function toggleMusic(){musicOn?musicPause():musicPlay()}
+function _syncBtn(){const b=document.getElementById('music-btn');b.classList.toggle('playing',musicOn)}
+document.addEventListener('visibilitychange',()=>{if(!musicReady)return;document.hidden?_aud.pause():(musicOn&&_aud.play().catch(()=>{}))});
+window.addEventListener('beforeunload',()=>{_aud.pause()});
+
+/* ══════════════════════════════════════════════════════
+   HELPERS
+══════════════════════════════════════════════════════ */
+function hint(k){showToast('💡 Mở file HTML, tìm WC.'+k+' và điền đường dẫn ảnh')}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
+function submitRsvp(){
+  const n=document.getElementById('rsvp-name').value.trim(),a=document.getElementById('rsvp-attend').value;
+  if(!n){showToast('Vui lòng nhập họ tên!');return}
+  if(!a){showToast('Vui lòng chọn câu trả lời!');return}
+  showToast(a==='yes'?'✓ Cảm ơn '+n+'! Hẹn gặp ngày '+WC.dateDisplay+' ♥':'Cảm ơn '+n+' đã thông báo!');
+  document.getElementById('rsvp-name').value='';document.getElementById('rsvp-attend').value='';
+}
+function sendWish(){showToast('Lời chúc đã được gửi! Cảm ơn bạn ♥');document.querySelector('.form-textarea').value=''}
+
+window.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
